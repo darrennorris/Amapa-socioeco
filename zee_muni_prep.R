@@ -17,10 +17,10 @@ Sys.setlocale("LC_TIME", "C")
 # GPKG com uma copia de arquivos (shapefiles) de IBGE Amazonia Legal 2020
 #https://www.ibge.gov.br/geociencias/organizacao-do-territorio/estrutura-territorial/15819-amazonia-legal.html?=&t=acesso-ao-produto
 
-st_layers("IBGE_Amazonia_Legal.GPKG")
+st_layers("vector//IBGE_Amazonia_Legal.GPKG")
 
 #Poligonos municipios Amapa
-sf::st_read("IBGE_Amazonia_Legal.GPKG", layer = "Mun_Amazonia_Legal_2020") %>% 
+sf::st_read("vector//IBGE_Amazonia_Legal.GPKG", layer = "Mun_Amazonia_Legal_2020") %>% 
   filter(NM_UF == "Amapá") -> sf_ap_muni
 #Projection para calculos de area (consistentes com os dados do IBGE 2020)
 ## South_America_Albers_Equal_Area_Conic
