@@ -5,4 +5,4 @@ Zoneamento Ecológico-Econômico do Estado do Amapá ([ZEE/AP](http://www.zee.ap
 
 Metrics and indicators describing demography, local productive systems and economics in the Brazilian state of Amapá.
 
-<img src="images/AP_mapa_IDHM.png" alt="IDHM" width="300" height="500">
+<img src="images/AP_mapa_IDHM.png" alt="IDHM" width="500" height="700">
