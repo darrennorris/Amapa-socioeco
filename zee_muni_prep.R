@@ -3,42 +3,26 @@
 library(tidyverse)
 library(readxl)
 library(sf)
+library(units)
 
 Sys.setlocale("LC_TIME", "C") 
 
-# Arquivos de IBGE Amazonia Legal 2020
+# Camadas
+# GPKG com uma copia de arquivos (shapefiles) de IBGE Amazonia Legal 2020
 #https://www.ibge.gov.br/geociencias/organizacao-do-territorio/estrutura-territorial/15819-amazonia-legal.html?=&t=acesso-ao-produto
-#shapes
-s01 <- "C:\\Users\\user\\Documents\\ZEE_socioeco\\analises\\lista_de_municipios_da_Amazonia_Legal_2020_SHP\\Amazonia_Legal_2020.shp"
-s02 <- "C:\\Users\\user\\Documents\\ZEE_socioeco\\analises\\lista_de_municipios_da_Amazonia_Legal_2020_SHP\\Sede_Mun_Amazonia_Legal_2020.shp"
-s03 <- "C:\\Users\\user\\Documents\\ZEE_socioeco\\analises\\lista_de_municipios_da_Amazonia_Legal_2020_SHP\\Mun_Amazonia_Legal_2020.shp"
-s04 <- "C:\\Users\\user\\Documents\\ZEE_socioeco\\analises\\AP\\AP.shp"
-s05 <- "C:\\Users\\user\\Documents\\ZEE_socioeco\\analises\\BRASIL_ativo\\BRASIL.shp"
-#Poligono Amazonia Legal
-sf_al <- st_make_valid(st_read(s01))
-sf_al %>%
-  st_area() -> sf_areas$area_m2
-#Pontos sedes municipios
-sf_al_muni_sede <- st_read(s02)
-#Poligonos municipios Amazonia Legal
-sf_al_muni <- st_make_valid(st_read(s03))
+
+st_layers("IBGE_Amazonia_Legal.GPKG")
+
 #Poligonos municipios Amapa
-sf_al_muni %>% filter(NM_UF == "Amapá") -> sf_ap_muni
-#Projection for area calculations (consistent with values provided by IBGE 2020)
+sf::st_read("IBGE_Amazonia_Legal.GPKG", layer = "Mun_Amazonia_Legal_2020") %>% 
+  filter(NM_UF == "Amapá") -> sf_ap_muni
+#Projection para calculos de area (consistentes com os dados do IBGE 2020)
 ## South_America_Albers_Equal_Area_Conic
 st_transform(sf_ap_muni, 
              "+proj=aea +lat_1=-5 +lat_2=-42 +lat_0=-32 +lon_0=-60 +x_0=0 +y_0=0 +ellps=aust_SA +units=m +no_defs") %>%
   st_area() -> sf_ap_muni$area_m2 
-# less than 0.1% differrence
-sf_ap_muni %>%
-  mutate(area_km2 = set_units(area_m2, km^2)) -> sf_ap_muni
-data.frame(sf_ap_muni) %>% 
-  mutate(area_diif = as.numeric(area_km2) - AREA_TOT, 
-         area_diif_per = ((as.numeric(area_km2) - AREA_TOT) / AREA_TOT)*100 
-  ) %>% 
-  ggplot(aes(x = AREA_TOT, y = area_diif_per)) + 
-  geom_point() + stat_smooth()
-#Polygon
+
+#Poligon e contorno do estod do Amapa
 sf_ap <- st_union(sf_ap_muni)
 sf_ap <- st_sf(data.frame(CD_UF="16", geom=sf_ap))
 #Lines
