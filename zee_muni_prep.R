@@ -194,6 +194,11 @@ tiff("AP_mapa_IDHM.tif", width = 15, height = 20, units = "cm", res = 600,
 AP_mapa_IDHM + theme(text = element_text(size = 8))
 dev.off() 
 
+png(file = "AP_mapa_IDHM.png", bg = "white", type = c("cairo"), 
+    width=3000, height=4000, res = 600)
+AP_mapa_IDHM + theme(text = element_text(size = 12))
+dev.off()
+
 save.image("~/ZEE_socioeco/ZEEAmapa/prep_dados.RData")
 
 # Income Bivariate (in) equality 
