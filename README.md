@@ -1,4 +1,6 @@
 # ZEEAmapá
+[![DOI](https://zenodo.org/badge/432228178.svg)](https://zenodo.org/badge/latestdoi/432228178)
+
 <img align="right" src="images/ZEE_AP_logo.jpg" alt="logo" width="200" style="margin-top: 20px">
 
 Zoneamento Ecológico-Econômico do Estado do Amapá ([ZEE/AP](http://www.zee.ap.gov.br/)). Projeto: Demografia, Arranjos Produtivos Locais, Índices e Indicadores Econômicos
