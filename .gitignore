@@ -27,3 +27,4 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 ZEEAmapa.Rproj
+prep_dados.RData
