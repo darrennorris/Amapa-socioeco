@@ -1,81 +1,4 @@
 
-#Packages
-library(tidyverse)
-library(readxl)
-library(sf)
-library(units)
-#remotes::install_github("rpradosiqueira/brazilmaps")
-library(brazilmaps)
-# Índice de Desenvolvimento Humano dos municípios, 
-# coletados a partir do Atlas do Desenvolvimento Humano pela Associação Brasileira de Jurimetria
-# remotes::install_github("abjur/abjData")
-library(abjData) # dados do IBGE compilados pela Associação Brasileira de Jurimetria
-
-Sys.setlocale("LC_TIME", "C") 
-
-# Camadas
-# GPKG com uma copia de arquivos (shapefiles) de IBGE Amazonia Legal 2020
-#https://www.ibge.gov.br/geociencias/organizacao-do-territorio/estrutura-territorial/15819-amazonia-legal.html?=&t=acesso-ao-produto
-
-st_layers("vector//IBGE_Amazonia_Legal.GPKG")
-
-#Poligonos municipios Amapa
-sf::st_read("vector//IBGE_Amazonia_Legal.GPKG", layer = "Mun_Amazonia_Legal_2020") %>% 
-  filter(NM_UF == "Amapá") -> sf_ap_muni
-#Projection para calculos de area (consistentes com os dados do IBGE 2020)
-## South_America_Albers_Equal_Area_Conic
-st_transform(sf_ap_muni, 
-             "+proj=aea +lat_1=-5 +lat_2=-42 +lat_0=-32 +lon_0=-60 +x_0=0 +y_0=0 +ellps=aust_SA +units=m +no_defs") %>%
-  st_area() -> sf_ap_muni$area_m2 
-
-#Poligon e contorno do estado do Amapá
-sf_ap <- st_union(sf_ap_muni)
-sf_ap <- st_sf(data.frame(CD_UF="16", geom=sf_ap))
-#Lines
-sf_ap_muni_line <- st_cast(sf_ap_muni, "MULTILINESTRING")
-
-
-# IDH por municipio
-uf_map <- get_brmap("State")
-glimpse(uf_map)
-region_map <- get_brmap("Region")
-glimpse(region_map)
-glimpse(pnud_muni) #16695 rows
-sigs <- pnud_siglas
-write.csv(sigs, "dados//siglas_pnud_municipios.csv", row.names = FALSE)
-
-#
-data.frame(region_map) %>% select(Region, desc_rg) %>% 
-  left_join(data.frame(uf_map) %>% select(nome, State, Region)) %>% 
-  mutate(state = tolower(nome)) %>% 
-  right_join(
-abjData::pnud_muni %>%
-  mutate(state =  tolower(ufn)) 
-) %>% distinct() -> df_pnud
-
-# Export
-saveRDS(df_pnud, "dados//pnud_municipios.RDS")
-write.csv(df_pnud, "dados//pnud_municipios.csv", row.names = FALSE)
-
-df_pnud %>% 
-  pivot_longer(starts_with("idhm")) %>% 
-  mutate(tipo = case_when(
-    name == "idhm" ~ "Geral",
-    name == "idhm_e" ~ "Educação",
-    name == "idhm_l" ~ "Longevidade",
-    name == "idhm_r" ~ "Renda"
-  )) %>% 
-  mutate(
-    regiao_nm = fct_reorder(desc_rg, value, median, .desc = TRUE),
-    tipo = lvls_reorder(tipo, c(2, 1, 3, 4))
-  ) %>% distinct() -> df_idhm
-out_cols <- c("Region", "desc_rg", "nome", "State", "state", "uf", 
-              "ano", "codmun6" ,  "codmun7" , "municipio", "ufn", 
-              "name", "value", "tipo", "regiao_nm" )
-# Export
-saveRDS(df_idhm[, out_cols], "dados//IDHM_municipios.RDS")
-write.csv(df_idhm[, out_cols], "dados//IDHM_municipios.csv", row.names = FALSE)
-
 df_pnud %>%
   ggplot(aes(value, regiao_nm)) +
   geom_boxplot(aes(fill = factor(ano))) + 
@@ -83,9 +6,9 @@ df_pnud %>%
   facet_wrap(~tipo) +
   theme_bw() +
   labs(title = "Índice de Desenvolvimento Humano Municipal",
-    x = "IDHM", 
-    y = "Região", 
-    caption = "Fonte: Atlas do Desenvolvimento Humano (http://www.atlasbrasil.org.br, acessado 7 de Outubro 2021)"
+       x = "IDHM", 
+       y = "Região", 
+       caption = "Fonte: Atlas do Desenvolvimento Humano (http://www.atlasbrasil.org.br, acessado 7 de Outubro 2021)"
   )  + 
   theme(plot.title.position = "plot", 
         plot.caption.position = "plot", 
@@ -96,19 +19,19 @@ tiff("IDHM_regiao.tif", width = 15, height = 15, units = "cm", res = 600,
 IDHM_regiao + theme(text = element_text(size = 8))
 dev.off()
 
-#Municipio em Amapa
+#Municipios em Amapa
 df_pnud %>% 
   filter(nome=="AMAPÁ") %>% 
   mutate(Region_label = 
-  case_when(municipio %in% c("CALÇOENE", "OIAPOQUE") ~"Norte", 
-            municipio %in% c("ITAUBAL", "CUTIAS") ~"Leste", 
-            municipio %in% c("LARANJAL DO JARI", "VITÓRIA DO JARI") ~"Sul", 
-            municipio %in% c("TARTARUGALZINHO", "PRACUÚBA", "AMAPÁ") ~"Meio Norte",
-            municipio %in% c("PORTO GRANDE", "FERREIRA GOMES", 
-                          "PEDRA BRANCA DO AMAPARI", "SERRA DO NAVIO") ~"Centro",
-            municipio %in% c("MACAPÁ", "MAZAGÃO", "SANTANA") ~"Metropolitana", 
-            TRUE ~ NA_character_
-  )) %>% 
+           case_when(municipio %in% c("CALÇOENE", "OIAPOQUE") ~"Norte", 
+                     municipio %in% c("ITAUBAL", "CUTIAS") ~"Leste", 
+                     municipio %in% c("LARANJAL DO JARI", "VITÓRIA DO JARI") ~"Sul", 
+                     municipio %in% c("TARTARUGALZINHO", "PRACUÚBA", "AMAPÁ") ~"Meio Norte",
+                     municipio %in% c("PORTO GRANDE", "FERREIRA GOMES", 
+                                      "PEDRA BRANCA DO AMAPARI", "SERRA DO NAVIO") ~"Centro",
+                     municipio %in% c("MACAPÁ", "MAZAGÃO", "SANTANA") ~"Metropolitana", 
+                     TRUE ~ NA_character_
+           )) %>% 
   mutate(
     Region_label = fct_reorder(Region_label, value, median, .desc = TRUE)
   ) %>%
@@ -131,7 +54,7 @@ tiff("AP_IDHM_regiao.tif", width = 15, height = 12, units = "cm", res = 600,
 AP_IDHM_regiao + theme(text = element_text(size = 8))
 dev.off()
 
-# 
+
 df_pnud %>% 
   filter(nome=="AMAPÁ") %>% 
   mutate(Region_label = 
@@ -166,20 +89,20 @@ dev.off()
 
 # IDHM mapas
 sf_ap_muni %>% left_join(
-df_pnud %>% 
-  filter(nome=="AMAPÁ") %>% 
-  mutate(codmun7 = as.character(codmun7), 
-         Region_label = 
-           case_when(municipio %in% c("CALÇOENE", "OIAPOQUE") ~"Norte", 
-                     municipio %in% c("ITAUBAL", "CUTIAS") ~"Leste", 
-                     municipio %in% c("LARANJAL DO JARI", "VITÓRIA DO JARI") ~"Sul", 
-                     municipio %in% c("TARTARUGALZINHO", "PRACUÚBA", "AMAPÁ") ~"Meio Norte",
-                     municipio %in% c("PORTO GRANDE", "FERREIRA GOMES", 
-                                      "PEDRA BRANCA DO AMAPARI", "SERRA DO NAVIO") ~"Centro",
-                     municipio %in% c("MACAPÁ", "MAZAGÃO", "SANTANA") ~"Metropolitana", 
-                     TRUE ~ NA_character_
-           )), 
-by = c("CD_MUN" = "codmun7")
+  df_pnud %>% 
+    filter(nome=="AMAPÁ") %>% 
+    mutate(codmun7 = as.character(codmun7), 
+           Region_label = 
+             case_when(municipio %in% c("CALÇOENE", "OIAPOQUE") ~"Norte", 
+                       municipio %in% c("ITAUBAL", "CUTIAS") ~"Leste", 
+                       municipio %in% c("LARANJAL DO JARI", "VITÓRIA DO JARI") ~"Sul", 
+                       municipio %in% c("TARTARUGALZINHO", "PRACUÚBA", "AMAPÁ") ~"Meio Norte",
+                       municipio %in% c("PORTO GRANDE", "FERREIRA GOMES", 
+                                        "PEDRA BRANCA DO AMAPARI", "SERRA DO NAVIO") ~"Centro",
+                       municipio %in% c("MACAPÁ", "MAZAGÃO", "SANTANA") ~"Metropolitana", 
+                       TRUE ~ NA_character_
+             )), 
+  by = c("CD_MUN" = "codmun7")
 ) -> sf_ap_idhm
 
 
