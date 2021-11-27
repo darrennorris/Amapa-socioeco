@@ -42,6 +42,8 @@ region_map <- get_brmap("Region")
 glimpse(region_map)
 glimpse(pnud_muni) #16695 rows
 sigs <- pnud_siglas
+write.csv(sigs, "dados//siglas_pnud_municipios.csv", row.names = FALSE)
+
 #
 data.frame(region_map) %>% select(Region, desc_rg) %>% 
   left_join(data.frame(uf_map) %>% select(nome, State, Region)) %>% 
@@ -49,7 +51,13 @@ data.frame(region_map) %>% select(Region, desc_rg) %>%
   right_join(
 abjData::pnud_muni %>%
   mutate(state =  tolower(ufn)) 
-) %>% 
+) %>% distinct() -> df_pnud
+
+# Export
+saveRDS(df_pnud, "dados//pnud_municipios.RDS")
+write.csv(df_pnud, "dados//pnud_municipios.csv", row.names = FALSE)
+
+df_pnud %>% 
   pivot_longer(starts_with("idhm")) %>% 
   mutate(tipo = case_when(
     name == "idhm" ~ "Geral",
@@ -60,7 +68,13 @@ abjData::pnud_muni %>%
   mutate(
     regiao_nm = fct_reorder(desc_rg, value, median, .desc = TRUE),
     tipo = lvls_reorder(tipo, c(2, 1, 3, 4))
-  ) %>% distinct() -> df_pnud
+  ) %>% distinct() -> df_idhm
+out_cols <- c("Region", "desc_rg", "nome", "State", "state", "uf", 
+              "ano", "codmun6" ,  "codmun7" , "municipio", "ufn", 
+              "name", "value", "tipo", "regiao_nm" )
+# Export
+saveRDS(df_idhm[, out_cols], "dados//IDHM_municipios.RDS")
+write.csv(df_idhm[, out_cols], "dados//IDHM_municipios.csv", row.names = FALSE)
 
 df_pnud %>%
   ggplot(aes(value, regiao_nm)) +
