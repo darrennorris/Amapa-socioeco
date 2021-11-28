@@ -1,5 +1,23 @@
 
-df_pnud %>%
+#Packages
+library(tidyverse)
+library(readxl)
+library(sf)
+
+#IDHM
+df_idhm <- readRDS("dados//IDHM_municipios.RDS")
+#
+#Poligonos municipios Amapa
+sf::st_read("vector//IBGE_Amazonia_Legal.GPKG", layer = "Mun_Amazonia_Legal_2020") %>% 
+  filter(NM_UF == "Amapá") -> sf_ap_muni
+#Poligon e contorno do estado do Amapá
+sf_ap <- st_union(sf_ap_muni)
+sf_ap <- st_sf(data.frame(CD_UF="16", geom=sf_ap))
+#Lines
+sf_ap_muni_line <- st_cast(sf_ap_muni, "MULTILINESTRING")
+
+#Figures
+df_idhm %>%
   ggplot(aes(value, regiao_nm)) +
   geom_boxplot(aes(fill = factor(ano))) + 
   scale_fill_discrete("Ano") +
@@ -13,14 +31,15 @@ df_pnud %>%
   theme(plot.title.position = "plot", 
         plot.caption.position = "plot", 
         plot.caption = element_text(hjust = 0)) -> IDHM_regiao
-IDHM_regiao      
-tiff("IDHM_regiao.tif", width = 15, height = 15, units = "cm", res = 600,
+IDHM_regiao 
+#Export
+tiff("figures//IDHM_regiao.tif", width = 15, height = 15, units = "cm", res = 600,
      compression = "lzw")
 IDHM_regiao + theme(text = element_text(size = 8))
 dev.off()
 
 #Municipios em Amapa
-df_pnud %>% 
+df_idhm %>% 
   filter(nome=="AMAPÁ") %>% 
   mutate(Region_label = 
            case_when(municipio %in% c("CALÇOENE", "OIAPOQUE") ~"Norte", 
@@ -49,13 +68,15 @@ df_pnud %>%
         plot.caption.position = "plot", 
         plot.caption = element_text(hjust = 0)) -> AP_IDHM_regiao
 AP_IDHM_regiao
-tiff("AP_IDHM_regiao.tif", width = 15, height = 12, units = "cm", res = 600,
+
+#export
+tiff("figures//AP_IDHM_regiao.tif", width = 15, height = 12, units = "cm", res = 600,
      compression = "lzw")
 AP_IDHM_regiao + theme(text = element_text(size = 8))
 dev.off()
 
 
-df_pnud %>% 
+df_idhm %>% 
   filter(nome=="AMAPÁ") %>% 
   mutate(Region_label = 
            case_when(municipio %in% c("CALÇOENE", "OIAPOQUE") ~"Norte", 
@@ -82,14 +103,15 @@ df_pnud %>%
         plot.caption = element_text(hjust = 0)) -> AP_IDHM_municipio
 AP_IDHM_municipio
 
-tiff("AP_IDHM_municipio.tif", width = 15, height = 12, units = "cm", res = 600,
+#Export
+tiff("figures//AP_IDHM_municipio.tif", width = 15, height = 12, units = "cm", res = 600,
      compression = "lzw")
 AP_IDHM_municipio + theme(text = element_text(size = 8))
 dev.off()  
 
 # IDHM mapas
 sf_ap_muni %>% left_join(
-  df_pnud %>% 
+  df_idhm %>% 
     filter(nome=="AMAPÁ") %>% 
     mutate(codmun7 = as.character(codmun7), 
            Region_label = 
@@ -104,7 +126,6 @@ sf_ap_muni %>% left_join(
              )), 
   by = c("CD_MUN" = "codmun7")
 ) -> sf_ap_idhm
-
 
 sf_ap_idhm %>% 
   ggplot() + 
@@ -126,12 +147,14 @@ sf_ap_idhm %>%
         plot.caption = element_text(hjust = 0)) + 
   theme(text = element_text(size = 18)) -> AP_mapa_IDHM
 AP_mapa_IDHM
-tiff("AP_mapa_IDHM.tif", width = 15, height = 20, units = "cm", res = 600,
+
+#Export
+tiff("figures//AP_mapa_IDHM.tif", width = 15, height = 20, units = "cm", res = 600,
      compression = "lzw")
 AP_mapa_IDHM + theme(text = element_text(size = 8))
 dev.off() 
 
-png(file = "AP_mapa_IDHM.png", bg = "white", type = c("cairo"), 
+png(file = "figures//AP_mapa_IDHM.png", bg = "white", type = c("cairo"), 
     width=3000, height=4000, res = 600)
 AP_mapa_IDHM + theme(text = element_text(size = 8))
 dev.off()
