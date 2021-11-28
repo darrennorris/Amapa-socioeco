@@ -1,7 +1,7 @@
 # ZEEAmapá
 [![DOI](https://zenodo.org/badge/432228178.svg)](https://zenodo.org/badge/latestdoi/432228178)
 
-<img align="right" src="images/ZEE_AP_logo.jpg" alt="logo" width="200" style="margin-top: 20px">
+<img align="right" src="figures/ZEE_AP_logo.jpg" alt="logo" width="200" style="margin-top: 20px">
 
 Código de [R](https://cran.r-project.org/) e dados para o mapeamento de variáveis socioeconômicas no estado do Amapá.
 
