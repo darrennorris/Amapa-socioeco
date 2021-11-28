@@ -18,4 +18,4 @@ Os mapas e cartogramas ficam na pasta [figures](https://github.com/darrennorris/
 Índice de Desenvolvimento Humano Municipal no Estado do Amapá
 (imagem de alta qualidade aqui: [IDHM/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_mapa_IDHM.tif) )
 
-<img src="images/AP_mapa_IDHM.png" alt="IDHM" width="300" height="400">
+<img src="figures/AP_mapa_IDHM.png" alt="IDHM" width="300" height="400">
