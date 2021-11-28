@@ -34,7 +34,6 @@ sf_ap <- st_sf(data.frame(CD_UF="16", geom=sf_ap))
 #Lines
 sf_ap_muni_line <- st_cast(sf_ap_muni, "MULTILINESTRING")
 
-
 # IDH por municipio
 uf_map <- get_brmap("State")
 glimpse(uf_map)
