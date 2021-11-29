@@ -16,8 +16,10 @@ Sys.setlocale("LC_TIME", "C")
 # Camadas
 # GPKG com uma copia de arquivos (shapefiles) de IBGE Amazonia Legal 2020
 #https://www.ibge.gov.br/geociencias/organizacao-do-territorio/estrutura-territorial/15819-amazonia-legal.html?=&t=acesso-ao-produto
-
+# Mineraçao AP. 
+#https://dados.gov.br/dataset/sistema-de-informacoes-geograficas-da-mineracao-sigmine#
 st_layers("vector//IBGE_Amazonia_Legal.GPKG")
+st_layers("vector//ZEEAP_mineracao.GPKG")
 
 #Poligonos municipios Amapa
 sf::st_read("vector//IBGE_Amazonia_Legal.GPKG", layer = "Mun_Amazonia_Legal_2020") %>% 
