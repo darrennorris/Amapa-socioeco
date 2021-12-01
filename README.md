@@ -1,4 +1,4 @@
-# ZEEAmapá
+# Amapa-socioeco
 [![DOI](https://zenodo.org/badge/432228178.svg)](https://zenodo.org/badge/latestdoi/432228178)
 
 Código de [R](https://cran.r-project.org/) e dados para o mapeamento de variáveis socioeconômicas no estado do Amapá.
