@@ -1,13 +1,8 @@
 # ZEEAmapá
 [![DOI](https://zenodo.org/badge/432228178.svg)](https://zenodo.org/badge/latestdoi/432228178)
 
-<img align="right" src="figures/ZEE_AP_logo.jpg" alt="logo" width="200" style="margin-top: 20px">
-
 Código de [R](https://cran.r-project.org/) e dados para o mapeamento de variáveis socioeconômicas no estado do Amapá.
 
-Zoneamento Ecológico-Econômico do Estado do Amapá ([ZEE/AP](http://www.zee.ap.gov.br/)). Projeto: Demografia, Arranjos Produtivos Locais, Índices e Indicadores Econômicos
-
-Metrics and indicators describing demography, local productive systems and economics in the Brazilian state of Amapá ([ZEE/AP](http://www.zee.ap.gov.br/)).
 
 Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
