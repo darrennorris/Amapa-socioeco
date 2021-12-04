@@ -161,6 +161,81 @@ dev.off()
 
 save.image("~/ZEE_socioeco/ZEEAmapa/prep_dados.RData")
 
+#Mineracao
+st_layers("vector//ZEEAP_mineracao.GPKG")
+
+#Poligonos municipios Amapa
+sf::st_read("vector//ZEEAP_mineracao.GPKG", layer = "sigmine_AP_2021_poligonos") -> sf_ap_mine
+
+sf::st_read("vector//ZEEAP_mineracao.GPKG", layer = "sigmine_AP_2021_municipio_poligonos") -> sf_ap_mine_muni
+table(sf_ap_mine_muni$NM_MUN)
+# Fases com arrecadação de 
+# contribuição financeira pelo aproveitamento econômico de bens minerais -CFEM
+fases <- unique(sf_ap_mine$FASE)
+fase_cfem <- c("CONCESSÃO DE LAVRA", 
+               "LAVRA GARIMPEIRA", 
+               "LICENCIAMENTO",
+               "REGISTRO DE EXTRAÇÃO")
+fase_cfem_lower <- tolower(fase_cfem)
+
+# Fases de aprovaçao 1 - 5 anos
+fase_aprov <- c("DIREITO DE REQUERER A LAVRA", 
+                "REQUERIMENTO DE LAVRA GARIMPEIRA", 
+                "REQUERIMENTO DE REGISTRO DE EXTRAÇÃO", 
+                "REQUERIMENTO DE LAVRA", 
+                     "REQUERIMENTO DE LICENCIAMENTO")
+fase_aprov_lower <- tolower(fase_aprov)
+
+# Fase de planejamento 5 - 10 anos
+fase_planej <- fases[-which(fases %in% c(fase_cfem, fase_aprov))]
+fase_planej_lower <- tolower(fase_planej)
+
+df_mineraçao_municipio %>% filter(FASE_label == "pesquisa") %>% 
+  group_by(FASE) %>% summarise(acount = n()) -> df_fasepesquisa
+fase_pesquisa_lower <- tolower(df_fasepesquisa$FASE)
+
+#Distributions of processes
+sf_ap_min %>%  
+  mutate(FASE_label = if_else(FASE %in% fase_exploracao, "extração", "pesquisa")) %>%
+  #filter(!SUBS == "DADO NÃO CADASTRADO") %>%
+  group_by(PROCESSO) %>%
+  ggplot() + 
+  geom_sf(data = sf_ap, colour = "black", size=2) +
+  geom_sf(data = sf_ap_muni, fill="grey70") +
+  geom_sf(data = sf_ap_muni_line, aes(colour = NM_UF), size=0.5, show.legend = "line") +
+  geom_sf(aes(fill = NM_UF), colour = "orange") +
+  facet_wrap(~FASE_label) + 
+  scale_colour_manual(name = "Municipíos", values = ("Amapá"="grey80"), labels = NULL) +
+  scale_fill_manual(name = "Processo", values = ("Amapá"="yellow"), labels = NULL) +
+  annotation_scale(location = "br", width_hint = 0.3, text_cex = 0.5) + 
+  annotation_north_arrow(which_north = "true",  
+                         height = unit(0.9, "cm"), width = unit(0.9, "cm"), 
+                         location = "tr",) +
+  geom_sf_label(label="PROJEÇÃO: POLICÔNICA\nMeridiano Central : -54° W.Gr.\nSistema de Referência: SIRGAS2000", 
+                x=-54,  y=-1.1,
+                #size = 3, #for .png
+                size = 1,
+                #label.padding = unit(0.55, "lines"), # Rectangle size around label. For .png
+                label.padding = unit(0.4, "lines"),
+                label.size = 0.25,
+                color = "black",
+                fill="white"
+  ) +
+  theme_bw() + 
+  labs(title = "Localização de processos minerários ativos no estado do Amapá",
+       subtitle = paste("Fases extração: ", toString(fase_exploracao_lower[c(7,8,1,3)]),",", 
+                        "\n", toString(fase_exploracao_lower[c(2,4,5,6)]),".\n", 
+                        "Fases pesquisa: ", toString(fase_pesquisa_lower[1:3]),",", 
+                        "\n", toString(fase_pesquisa_lower[4:5]),".", sep = ""),
+       x="", y="",
+       caption = "Fonte: Agência Nacional de Mineração (Sistema de Informações Geográficas da Mineração, acessado 8 de Outubro 2021),
+       Instituto Brasileiro de Geografia e Estatística (Municípios da Amazônia Legal 2020, acessado 7 de Outubro 2021)") + 
+  theme(plot.title.position = "plot", 
+        plot.caption.position = "plot", 
+        plot.caption = element_text(hjust = 0)) + 
+  theme(text = element_text(size = 18))  + 
+  theme(legend.key.width = unit(1,"cm")) -> AP_mapa_minero_poligonos
+
 # Income Bivariate (in) equality 
 # https://timogrossenbacher.ch/2019/04/bivariate-maps-with-ggplot2-and-sf/
 sigs <- pnud_siglas
