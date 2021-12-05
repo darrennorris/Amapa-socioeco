@@ -32,4 +32,7 @@ Espera-se que as tensões entre mineração e desenvolvimento sustentavel se int
 
 Mineração a escala idustrial inicio na decada de 1950 no Estado do Amapá. Um relatorio recente ([Costa 2019](http://ageamapa.ap.gov.br/docs/investinamapa/Plano-de-Mineracao.pdf)) demonstra que a exportação de bens minerais ainda é o principal gerador de receitas na balança comercial amapaense, representando aproximadamente 65% de tudo que foi exportado pelo estado em 2018 (cerca de 150 milhões de dólares (US$)).
 
+A arrecadação atraves Compensação Financeira pela Exploração de Recursos Minerais gerar recursos finaceiros para os estado e municipios destinadas a reparar os danos causados nas áreas de exploração mineral.
+
 <img src="figures/AP_fig_cfem.png" alt="IDHM" width="400" height="200">
+
