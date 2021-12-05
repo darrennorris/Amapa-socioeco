@@ -2,10 +2,19 @@
 #Packages
 library(tidyverse)
 library(readxl)
+library(scales)
 library(sf)
+library(viridis)
+library(gridExtra)
 
 #IDHM
 df_idhm <- readRDS("dados//IDHM_municipios.RDS")
+
+read_excel("dados//ZEE_AP_basedados_sig.xlsx", 
+                           sheet = "IDHM_e_mais", 
+                    .name_repair = "universal") %>% 
+  mutate(codmun7 = as.character(codmun7)) -> df_idhm_mais
+
 #
 #Poligonos municipios Amapa
 sf::st_read("vector//IBGE_Amazonia_Legal.GPKG", layer = "Mun_Amazonia_Legal_2020") %>% 
@@ -134,6 +143,7 @@ sf_ap_idhm %>%
   geom_sf(data = sf_ap_muni_line, aes(colour = NM_UF), size=0.5, show.legend = "line") +
   scale_colour_manual(name = "Municipíos     ", values = ("Amapá"="grey80"), labels = NULL) +
   scale_fill_viridis_c("IDHM") + 
+  scale_x_continuous(breaks = seq(-55, -49.8, by = 2)) +
   facet_grid(tipo~ano) + 
   theme_bw() +
   labs(title = "Índice de Desenvolvimento Humano Municipal no Estado do Amapá", 
@@ -162,6 +172,48 @@ dev.off()
 save.image("~/ZEE_socioeco/ZEEAmapa/prep_dados.RData")
 
 #Mineracao
+#CFEM Compensação Financeira pela Exploração de Recursos Minerais 
+#https://sistemas.anm.gov.br/arrecadacao/extra/Relatorios/arrecadacao_cfem_substancia.aspx
+
+sf_ap_muni %>% right_join(
+(df_idhm_mais %>% filter(!is.na(per_cfem)) %>% 
+  select(ano, codmun7, per_cfem)), by = c("CD_MUN"="codmun7")) -> sf_cfem
+
+sf_cfem %>% 
+  mutate(per_cfem = ifelse(per_cfem ==0,NA, per_cfem)) %>%
+  ggplot() + 
+  geom_sf(aes(fill = per_cfem)) + 
+  scale_x_continuous(breaks = seq(-55, -49.8, by = 2)) +
+  facet_wrap(~ano) + 
+  theme_bw() + 
+  #scale_fill_viridis_c("CFEM %", trans = "log", labels =comma_format(accuracy = 1)) 
+  scale_fill_gradient2("CFEM %", low = muted("magenta"),  mid = "white",  
+                       high = muted("blue"),  midpoint = 2) + 
+  labs(title = "Distribuição de Compensação Financeira pela Exploração de\nRecursos Minerais no Estado do Amapá", 
+       subtitle = "Percentagem arrecadado por decada",
+       x="", y="",
+       caption = "Fonte: Agência Nacional de Mineração (acessado 3 de Dezembro 2021),
+       Instituto Brasileiro de Geografia e Estatística (Municípios da Amazônia Legal 2020, acessado 7 de Outubro 2021), 
+       PROJEÇÃO: POLICÔNICA. Meridiano Central: -54° W.Gr.Sistema de Referência: SIRGAS2000") + 
+  theme(plot.title.position = "plot", 
+        plot.caption.position = "plot", 
+        plot.caption = element_text(hjust = 0), 
+        text = element_text(size = 8))   + 
+  theme(legend.key.width = unit(0.5,"cm"), 
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0)) -> AP_mapa_cfem
+AP_mapa_cfem
+tiff("figures//AP_mapa_cfem.tif", width = 15, height = 8, units = "cm", res = 600,
+     compression = "lzw")
+AP_mapa_cfem
+dev.off()
+
+png(file = "figures//AP_mapa_IDHM.png", bg = "white", type = c("cairo"), 
+    width=7500, height=4000, res = 600)
+AP_mapa_IDHM + theme(text = element_text(size = 8))
+dev.off()
+
+# Processos
 st_layers("vector//ZEEAP_mineracao.GPKG")
 
 #Poligonos municipios Amapa
