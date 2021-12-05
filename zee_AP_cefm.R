@@ -8,6 +8,8 @@ library(readxl)
 library(scales)
 library(sf)
 library(viridis)
+library(gridExtra)
+
 dfmin <- read_excel("dados//ANM_CEFM.xlsx", sheet = "CFEM_municipios_mensal", 
                     .name_repair = "universal") 
 unique(dfmin$SUBS)
@@ -73,7 +75,13 @@ dfmin %>% filter(!is.na(SUBS_simples)) %>%
        caption = "Fonte: Agência Nacional de Mineração, acessado 3 de Dezembro 2021") +
   theme(plot.title.position = "plot", 
         plot.caption.position = "plot", 
-        plot.caption = element_text(hjust = 0)) -> AP_fig_cfem
+        plot.caption = element_text(hjust = 0), 
+        text = element_text(size = 8)) -> AP_fig_cfem
+AP_fig_cfem
+tiff("figures//AP_fig_cfem.tif", width = 15, height = 8, units = "cm", res = 600,
+     compression = "lzw")
+AP_fig_cfem
+dev.off()
 
 dfmin %>% 
   group_by(ano, ano_ref) %>% 
@@ -115,27 +123,36 @@ sf_cefm %>%
 sf_cefm %>% 
   mutate(per_cefm = ifelse(per_cefm ==0,NA, per_cefm)) %>%
   ggplot() + 
-  geom_sf(aes(fill = per_cefm)) +
+  geom_sf(aes(fill = per_cefm)) + 
+  scale_x_continuous(breaks = seq(-55, -49.8, by = 2)) +
   facet_wrap(~ano) + 
   theme_bw() + 
-  #scale_fill_viridis_c("CEFM %", trans = "log", labels =comma_format(accuracy = 1)) 
-scale_fill_gradient2("CEFM %", low = muted("magenta"),  mid = "white",  
+  #scale_fill_viridis_c("CFEM %", trans = "log", labels =comma_format(accuracy = 1)) 
+scale_fill_gradient2("CFEM %", low = muted("magenta"),  mid = "white",  
                      high = muted("blue"),  midpoint = 2) + 
   labs(title = "Distribuição de Compensação Financeira pela Exploração de\nRecursos Minerais no Estado do Amapá", 
        subtitle = "Percentagem arrecadado por decada",
        x="", y="",
-       caption = "Fonte: Agência Nacional de Mineração (Sistema de Informações Geográficas da Mineração, acessado 8 de Outubro 2021),
-       Instituto Brasileiro de Geografia e Estatística (Municípios da Amazônia Legal 2020, acessado 7 de Outubro 2021)") + 
+       caption = "Fonte: Agência Nacional de Mineração (acessado 3 de Dezembro 2021),
+       Instituto Brasileiro de Geografia e Estatística (Municípios da Amazônia Legal 2020, acessado 7 de Outubro 2021), 
+       PROJEÇÃO: POLICÔNICA. Meridiano Central: -54° W.Gr.Sistema de Referência: SIRGAS2000") + 
   theme(plot.title.position = "plot", 
         plot.caption.position = "plot", 
-        plot.caption = element_text(hjust = 0))   + 
-  theme(legend.key.width = unit(1,"cm")) -> AP_mapa_cfem
-
-
-
-tiff("AP_mapa_minero_poligonos.tif", width = 16, height = 11, units = "cm", res = 600,
+        plot.caption = element_text(hjust = 0), 
+        text = element_text(size = 8))   + 
+  theme(legend.key.width = unit(0.5,"cm"), 
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0)) -> AP_mapa_cfem
+AP_mapa_cfem
+tiff("figures//AP_mapa_cfem.tif", width = 15, height = 8, units = "cm", res = 600,
      compression = "lzw")
-AP_mapa_minero_poligonos + theme(text = element_text(size = 8))
+AP_mapa_cfem
+dev.off()
+
+## need to do more clecer splitting to fit properly
+tiff("figures//AP_cfem.tif", width = 12, height = 20, units = "cm", res = 600,
+     compression = "lzw")
+gridExtra::grid.arrange(AP_fig_cfem, AP_mapa_cfem, ncol = 1)
 dev.off()
 
 
