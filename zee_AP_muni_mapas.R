@@ -208,9 +208,9 @@ tiff("figures//AP_mapa_cfem.tif", width = 15, height = 8, units = "cm", res = 60
 AP_mapa_cfem
 dev.off()
 
-png(file = "figures//AP_mapa_IDHM.png", bg = "white", type = c("cairo"), 
-    width=7500, height=4000, res = 600)
-AP_mapa_IDHM + theme(text = element_text(size = 8))
+png(file = "figures//AP_mapa_cfem.png", bg = "white", type = c("cairo"), 
+    width=3000, height=2000, res = 600)
+AP_mapa_cfem + theme(text = element_text(size = 8))
 dev.off()
 
 # Processos
