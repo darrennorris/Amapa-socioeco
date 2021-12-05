@@ -30,7 +30,7 @@ Os mapas e cartogramas ficam na pasta [figures](https://github.com/darrennorris/
 ### Mineração no Estado do Amapá
 Espera-se que as tensões entre mineração e desenvolvimento sustentavel se intensifiquem à medida que as populações humanas crescem e as tecnologias avançam. No entanto, a mineração também pode ser um meio de financiar caminhos alternativos de desenvolvimento que, a longo prazo, podem trazer verios beneficios ([DDSM](https://www.gov.br/mme/pt-br/assuntos/secretarias/geologia-mineracao-e-transformacao-mineral/desenvolvimento-sustentavel-na-mineracao-1), [IISD](https://www.iisd.org/articles/how-advance-sustainable-mining)).
 
-Mineração a escala idustrial inicio na decada de 1950 no Estado do Amapá. Um relatorio recente ([Costa 2019](http://ageamapa.ap.gov.br/docs/investinamapa/Plano-de-Mineracao.pdf)) demonstra que a exportação de bens minerais ainda é o principal gerador de receitas na balança comercial amapaense, representando aproximadamente 65% de tudo que foi exportado pelo estado em 2018 (cerca de 150 milhões de dólares (US$)).
+Mineração a escala idustrial inicio na decada de 1950 no Estado do Amapá. Depois de mais de 70 anos, um relatorio recente ([Costa 2019](http://ageamapa.ap.gov.br/docs/investinamapa/Plano-de-Mineracao.pdf)) demonstra que a exportação de bens minerais ainda é o principal gerador de receitas na balança comercial amapaense, representando aproximadamente 65% de tudo que foi exportado pelo estado em 2018 (cerca de 150 milhões de dólares (US$)).
 
 A arrecadação atraves Compensação Financeira pela Exploração de Recursos Minerais gerar recursos finaceiros para os estado e municipios destinadas a reparar os danos causados nas áreas de exploração mineral.
 
