@@ -73,7 +73,7 @@ dfmin %>% filter(!is.na(SUBS_simples)) %>%
        caption = "Fonte: Agência Nacional de Mineração, acessado 3 de Dezembro 2021") +
   theme(plot.title.position = "plot", 
         plot.caption.position = "plot", 
-        plot.caption = element_text(hjust = 0))
+        plot.caption = element_text(hjust = 0)) -> AP_fig_cfem
 
 dfmin %>% 
   group_by(ano, ano_ref) %>% 
@@ -86,12 +86,56 @@ dfmin %>%
               mean_cefm = mean(tot_ano, na.rm=TRUE)) %>% 
   left_join(
 dfmin %>% 
-  group_by(ano, municipio) %>% 
+  group_by(ano,ufn, codmun7, municipio) %>% 
   summarise(total_cefm = sum(Total_ano, na.rm=TRUE)) %>% 
   ungroup() %>% 
   group_by(ano) %>% 
   arrange(ano, desc(total_cefm)) %>% 
   mutate(csum_cefm = cumsum(total_cefm)) %>% 
   mutate(per_cefm = (total_cefm / max(csum_cefm)) *100, 
-         cper_cefm = (csum_cefm / max(csum_cefm)) *100)
+         cper_cefm = (csum_cefm / max(csum_cefm)) *100, 
+         codmun7 = as.character(codmun7))
 ) -> dfcefm
+
+#Poligonos municipios Amapa
+sf::st_read("vector//IBGE_Amazonia_Legal.GPKG", layer = "Mun_Amazonia_Legal_2020") %>% 
+  filter(NM_UF == "Amapá") -> sf_ap_muni
+#Poligon e contorno do estado do Amapá
+sf_ap <- st_union(sf_ap_muni)
+sf_ap <- st_sf(data.frame(CD_UF="16", geom=sf_ap))
+#Lines
+sf_ap_muni_line <- st_cast(sf_ap_muni, "MULTILINESTRING")
+
+sf_ap_muni %>% right_join(dfcefm, by = c("CD_MUN" = "codmun7")) -> sf_cefm
+
+sf_cefm %>% 
+  mutate(per_cefm = ifelse(per_cefm ==0,NA, per_cefm)) %>%
+  mutate(per_cefm_log = log1p(per_cefm)) %>% pull(per_cefm_log)
+
+sf_cefm %>% 
+  mutate(per_cefm = ifelse(per_cefm ==0,NA, per_cefm)) %>%
+  ggplot() + 
+  geom_sf(aes(fill = per_cefm)) +
+  facet_wrap(~ano) + 
+  theme_bw() + 
+  #scale_fill_viridis_c("CEFM %", trans = "log", labels =comma_format(accuracy = 1)) 
+scale_fill_gradient2("CEFM %", low = muted("magenta"),  mid = "white",  
+                     high = muted("blue"),  midpoint = 2) + 
+  labs(title = "Distribuição de Compensação Financeira pela Exploração de\nRecursos Minerais no Estado do Amapá", 
+       subtitle = "Percentagem arrecadado por decada",
+       x="", y="",
+       caption = "Fonte: Agência Nacional de Mineração (Sistema de Informações Geográficas da Mineração, acessado 8 de Outubro 2021),
+       Instituto Brasileiro de Geografia e Estatística (Municípios da Amazônia Legal 2020, acessado 7 de Outubro 2021)") + 
+  theme(plot.title.position = "plot", 
+        plot.caption.position = "plot", 
+        plot.caption = element_text(hjust = 0))   + 
+  theme(legend.key.width = unit(1,"cm")) -> AP_mapa_cfem
+
+
+
+tiff("AP_mapa_minero_poligonos.tif", width = 16, height = 11, units = "cm", res = 600,
+     compression = "lzw")
+AP_mapa_minero_poligonos + theme(text = element_text(size = 8))
+dev.off()
+
+
