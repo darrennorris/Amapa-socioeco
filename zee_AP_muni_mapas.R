@@ -188,7 +188,7 @@ sf_cfem %>%
   theme_bw() + 
   #scale_fill_viridis_c("CFEM %", trans = "log", labels =comma_format(accuracy = 1)) 
   scale_fill_gradient2("CFEM %", low = muted("magenta"),  mid = "white",  
-                       high = muted("blue"),  midpoint = 2) + 
+                       high = muted("blue"),  midpoint = 2, na.value = "grey80") + 
   labs(title = "Distribuição de Compensação Financeira pela Exploração de\nRecursos Minerais no Estado do Amapá", 
        subtitle = "Percentagem arrecadado por decada",
        x="", y="",
@@ -203,6 +203,8 @@ sf_cfem %>%
         legend.margin=margin(0,0,0,0),
         legend.box.margin=margin(0,0,0,0)) -> AP_mapa_cfem
 AP_mapa_cfem
+
+#Export
 tiff("figures//AP_mapa_cfem.tif", width = 15, height = 8, units = "cm", res = 600,
      compression = "lzw")
 AP_mapa_cfem
