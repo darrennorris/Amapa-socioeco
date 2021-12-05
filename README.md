@@ -36,6 +36,6 @@ A arrecadação atraves Compensação Financeira pela Exploração de Recursos M
 
 <img src="figures/AP_fig_cfem.png" alt="IDHM" width="400" height="200">
 
-Proporcionalmente duas muncipios no estado (Vitória do Jari e Pedra Branca do Amapari) representem os muncipios com maior receitas de CFEM entre 2004 e 2021.
+Dois muncipios no estado (Vitória do Jari e Pedra Branca do Amapari) representem os muncipios com maior receitas de CFEM entre 2004 e 2021.
 
 <img src="figures/AP_mapa_cfem.png" alt="IDHM" width="430" height="300">
