@@ -83,6 +83,12 @@ tiff("figures//AP_fig_cfem.tif", width = 15, height = 8, units = "cm", res = 600
 AP_fig_cfem
 dev.off()
 
+png(file = "figures//AP_fig_cfem.png", bg = "white", type = c("cairo"), 
+    width=3000, height=1500, res = 600)
+AP_fig_cfem + theme(text = element_text(size = 7))
+dev.off()
+
+
 dfmin %>% 
   group_by(ano, ano_ref) %>% 
   summarise(tot_ano = sum(Total_ano)) %>% 
