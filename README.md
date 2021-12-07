@@ -36,6 +36,12 @@ Especificamente, para acelarar o desenvolvimento humano no estado do Amapá, aç
 
 <img src="figures/AP_fig_impvars.png" alt="IDHM" width="450" height="500">
 
+Lembrando que variáveis socioeconômicas não existtem em isolação, e com base nos dados globais mostrando importancia de educação ([Hans Rosling Religion and babies](https://www.ted.com/talks/hans_rosling_religions_and_babies/transcript?language=en)), podemos olhar munaças entre 1991 e 2010 de educação e maternidade em mulheres mais jovens.
+
+(imagem de alta qualidade aqui: [maternidade/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_fig_muledu.tif) )
+
+<img src="figures/AP_fig_muledu.png" alt="IDHM" width="450" height="500">
+
 ### Mineração no Estado do Amapá
 Espera-se que as tensões entre mineração e desenvolvimento sustentavel se intensifiquem à medida que as populações humanas crescem e as tecnologias avançam. No entanto, a mineração também pode ser um meio de financiar caminhos alternativos de desenvolvimento que, a longo prazo, podem trazer verios beneficios ([DDSM](https://www.gov.br/mme/pt-br/assuntos/secretarias/geologia-mineracao-e-transformacao-mineral/desenvolvimento-sustentavel-na-mineracao-1), [IISD](https://www.iisd.org/articles/how-advance-sustainable-mining)).
 
