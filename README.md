@@ -27,7 +27,7 @@ Os mapas e cartogramas ficam na pasta [figures](https://github.com/darrennorris/
 
 <img src="figures/AP_mapa_IDHM.png" alt="IDHM" width="300" height="400">
 
-Para entender melhor os valores do IDHM apresentados e tambem para facilitar o diologo entre pessoas, poderes e institutos é possivel verificar quais sao os variáveis socioeconômicas mais importantes para as mudanças durante 30 anos.
+Para entender melhor os valores do IDHM apresentados e tambem para facilitar o diologo entre pessoas, poderes e institutos é possivel verificar quais sao os variáveis socioeconômicas mais importantes para as mudanças durante os ultimos 30 anos.
 
 Um diagnostico com base em modelos lineares mostrar que açoes para reduzir pobreza, reduzir desigualdade e melhorar educação sao os mais relevantes para melhorar o desenvolvimento humano no estado do Amapá. 
 
