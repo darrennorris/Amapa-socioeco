@@ -103,6 +103,9 @@ df_regression_out %>%
   mutate(aic_flag = factor(ifelse(aic_rank == 1, 1, 0))) %>%
   filter(r.squared > 0.9, aic_rank <= 5) -> df_best_vars
 
+#best for each
+df_best_vars %>% filter(aic_flag == 1)
+
 df_best_vars %>% 
   left_join(df_siglas, by = c("explain_name" = "sigla")) -> df_best_vars
 unique(df_best_vars$response_name)
@@ -146,3 +149,106 @@ png(file = "figures//AP_fig_impvars.png", bg = "white", type = c("cairo"),
     width=4000, height=5000, res = 600)
 AP_fig_impvars + theme(text = element_text(size = 8))
 dev.off()
+
+#Educação e gravidez
+#best for each
+df_best_vars %>% filter(aic_flag == 1) %>% pull(nome_curto)
+# t_m10a14cf Percentual de mulheres de 10 a 14 anos de idade que tiveram filhos
+# t_m15a17cf Percentual de mulheres de 15 a 17 anos de idade que tiveram filhos
+# t_fund18m  "% de 18 anos ou mais com fundamental completo" 
+# t_fund11a13 "% de 11 a 13 anos nos anos finais do fundamental ou com fundamental completo"
+vars_mul_edu <- c("t_m10a14cf", "t_m15a17cf", "t_fund18m", "t_fund11a13")
+resp_vars_mul_edu <- c("t_fund18m", "t_fund11a13")
+exp_vars_mul_edu <- c("t_m10a14cf", "t_m15a17cf")
+
+df_se %>% select(c(id_col, "ano", "t_fund11a13", "t_m10a14cf")) %>% 
+  mutate(Idade = "10 a 14 anos", 
+         Idade_escola = "11 a 13 anos",
+          "Percentual de mulheres que tiveram filhos" = t_m10a14cf,
+         "Percentual com fundamental completo" = t_fund11a13) %>% 
+  bind_rows(
+df_se %>% select(c(id_col, "ano", "t_fund18m", "t_m15a17cf")) %>% 
+  mutate(Idade = "15 a 17 anos", 
+         Idade_escola = "18 anos ou mais",
+         "Percentual de mulheres que tiveram filhos" = t_m15a17cf,
+         "Percentual com fundamental completo" = t_fund18m)) -> df_Ap_mul_edu
+
+#Plot
+# to do - make shapes as regions?
+df_Ap_mul_edu %>% group_by(ano, Idade_escola) %>% 
+  summarise("Percentual de mulheres que tiveram filhos" = 
+              median(`Percentual de mulheres que tiveram filhos`, na.rm = TRUE), 
+            "Percentual com fundamental completo" = 
+              median(`Percentual com fundamental completo`), na.rm = TRUE) -> df_mulsum
+
+df_Ap_mul_edu %>% 
+  ggplot(aes(y = `Percentual de mulheres que tiveram filhos`, 
+             x = `Percentual com fundamental completo`)) + 
+  geom_point(colour = "black", size = 1.0) +
+  geom_point(aes(y = t_m10a14cf, x = `Percentual com fundamental completo`), 
+             colour = "magenta", size = 1.0) +
+  geom_point(aes(colour = Idade), size = 0.8) + 
+  geom_vline(data = df_mulsum, linetype = "dashed", size = 0.3,
+             aes(xintercept = `Percentual com fundamental completo`)) +
+  geom_hline(data = df_mulsum, linetype = "dashed", size = 0.3,
+             aes(yintercept = `Percentual de mulheres que tiveram filhos`)) +
+  stat_smooth(method = "gam", aes(colour = Idade), size = 0.4) + 
+  scale_color_viridis_d("Idade maternidade") +
+  facet_wrap(Idade_escola~ano) + 
+  labs(title = "Maternidade e Educação no Estado do Amapá", 
+       subtitle = "Linhas tracejadas representem valores mediano dos municipios",
+       caption = "Fonte: Atlas do Desenvolvimento Humano: http://www.atlasbrasil.org.br/",
+       y = "Percentual de mulheres que tiveram filhos", 
+       x = "Percentual total (homens e mulheres)\nnos anos finais/com ensino fundamental completo") + 
+  theme(plot.title.position = "plot", 
+        plot.caption.position = "plot", 
+        plot.caption = element_text(hjust = 0)) +
+  theme(legend.position="top") + 
+  guides(colour = guide_legend(title.position = "top")) + 
+  theme(legend.margin = margin(0, 0, 0.0, 0), 
+        legend.title = element_text(size = 6),
+        legend.box.spacing = unit(2, "mm"),
+        legend.key.width = unit(4, 'mm'),
+        legend.key.height = unit(4, 'mm'),
+        legend.spacing.x = unit(1, "mm"), 
+        legend.spacing.y = unit(1, "mm")) + 
+  theme(strip.text = element_text(margin = margin(0, 0, 0, 0))) -> AP_fig_muledu
+AP_fig_muledu
+
+#Export
+tiff("figures//AP_fig_muledu.tif", width = 10, height = 8, units = "cm", res = 600,
+     compression = "lzw")
+AP_fig_muledu + theme(text = element_text(size = 7))
+dev.off()
+
+png(file = "figures//AP_fig_muledu.png", bg = "white", type = c("cairo"), 
+    width=4000, height=3000, res = 600)
+AP_fig_muledu + theme(text = element_text(size = 11))
+dev.off()
+  
+#Check what is going on below!!!
+df_se %>% select(c(id_col, "ano", vars_mul_edu)) %>% 
+
+  pivot_longer(cols = c(resp_vars_mul_edu), names_to = "response_name", 
+               values_to = "response_val")  %>%
+  pivot_longer(cols = c(exp_vars_mul_edu), 
+               names_to = "explain_name", values_to = "explain_value") %>% 
+  mutate(explain_label = case_when(
+    explain_name == "t_m10a14cf" ~ "10 a 14 anos",
+    explain_name == "t_m15a17cf" ~ "15 a 17 anos")) %>%
+  ggplot(aes(x = explain_value, y = response_val, colour = explain_label)) + 
+           geom_point() + 
+  stat_smooth(method = "lm") + 
+  scale_color_discrete("Idade") +
+  facet_wrap(response_name~ano) + 
+  labs(title = "Maternidade e Educação no Estado do Amapá", 
+       subtitle = "",
+       caption = "Fonte: Atlas do Desenvolvimento Humano: http://www.atlasbrasil.org.br/",
+       x = "Percentual de mulheres que tiveram filhos", 
+       y = "Percentual com fundamental completo") + 
+  theme(plot.title.position = "plot", 
+        plot.caption.position = "plot", 
+        plot.caption = element_text(hjust = 0)) + 
+  theme(legend.position="top") + 
+  guides(colour = guide_legend(title.position = "top"))
+  
