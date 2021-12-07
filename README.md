@@ -32,7 +32,7 @@ Para entender melhor os valores do IDHM apresentados e tambem para facilitar o d
 Um diagnostico com base em modelos lineares mostrar que a pobreza, desigualdade e educação sao os mais relevantes para melhorar o desenvolvimento humanono no estado do Amapá.  
 (imagem de alta qualidade aqui: [IDHM/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_fig_impvars.tif) )
 
-<img src="figures/AP_fig_impvars.png" alt="IDHM" width="600" height="500">
+<img src="figures/AP_fig_impvars.png" alt="IDHM" width="500" height="500">
 
 ### Mineração no Estado do Amapá
 Espera-se que as tensões entre mineração e desenvolvimento sustentavel se intensifiquem à medida que as populações humanas crescem e as tecnologias avançam. No entanto, a mineração também pode ser um meio de financiar caminhos alternativos de desenvolvimento que, a longo prazo, podem trazer verios beneficios ([DDSM](https://www.gov.br/mme/pt-br/assuntos/secretarias/geologia-mineracao-e-transformacao-mineral/desenvolvimento-sustentavel-na-mineracao-1), [IISD](https://www.iisd.org/articles/how-advance-sustainable-mining)).
