@@ -2,7 +2,6 @@
 #I.e. variable reduciton exercise
 #
 #Packages
-library(plyr)
 library(tidyverse)
 library(tidymodels)
 library(readxl)
@@ -174,7 +173,7 @@ df_se %>% select(c(id_col, "ano", "t_fund18m", "t_m15a17cf")) %>%
          "Percentual com fundamental completo" = t_fund18m)) -> df_Ap_mul_edu
 
 #Plot
-# to do - make shapes as regions?
+# to do - make point shapes to show regions?
 df_Ap_mul_edu %>% group_by(ano, Idade_escola) %>% 
   summarise("Percentual de mulheres que tiveram filhos" = 
               median(`Percentual de mulheres que tiveram filhos`, na.rm = TRUE), 
