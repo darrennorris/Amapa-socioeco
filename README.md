@@ -36,12 +36,12 @@ Especificamente, para acelerar o desenvolvimento humano no estado do Amapá, aç
 
 <img src="figures/AP_fig_impvars.png" alt="IDHM" width="450" height="500">
 
-Tabela
-<div>
-<iframe srcdoc ="table_cor_pren60.html" title="tabela"></iframe>
-<div>
-
-knitr::include_url("table_cor_pren60.html")
+|  correlação  |  nome                                                  |
+|--------------|--------------------------------------------------------|
+|  1.00        |  Percentual da renda apropriada pelos 60% mais pobres  |
+|  0.96        |  Percentual da renda apropriada pelos 80% mais pobres  |
+|  0.95        |  Percentual da renda apropriada pelos 40% mais pobres  |
+|  0.82        |  Percentual da renda apropriada pelos 20% mais pobres  |
 
 Primeiro passo para melhorar (aumentar) o percentual de 11-13 anos com ensino fundamental completo (e portanto educação no estado) seria aumentar a porcentagem de mulheres concluindo ensino fundamental.
 
