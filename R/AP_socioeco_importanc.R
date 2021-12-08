@@ -175,8 +175,10 @@ df_pren60 %>%
          correlação = cor_pren60) %>%
   select(correlação, nome) %>% 
   kbl() %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
-  save_kable(file = "table_cor_pren60.html", self_contained = T)
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) -> table_cor_pren60
+
+cor_pren60 %>%
+  save_kable(file = "dados//tables//table_cor_pren60.html", self_contained = T)
 
 df_t_fund11a1 %>% 
   filter(cor_t_fund11a13 > 0.8) %>% 
@@ -188,7 +190,7 @@ df_t_fund11a1 %>%
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
   scroll_box(width = "500px", height = "200px") %>%
-  save_kable(file = "table_cor_t_fund11a13.html", self_contained = T)
+  save_kable(file = "dados//tables//table_cor_t_fund11a13.html", self_contained = T)
 
 
 

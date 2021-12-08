@@ -36,6 +36,11 @@ Especificamente, para acelerar o desenvolvimento humano no estado do Amapá, aç
 
 <img src="figures/AP_fig_impvars.png" alt="IDHM" width="450" height="500">
 
+
+<table>
+<tr><th>Table 1 Heading 1 </th><th>Table 1 Heading 2</th></tr>
+<tr><td>
+
 |  correlação  |  nome                                                  |
 |--------------|--------------------------------------------------------|
 |  1.00        |  Percentual da renda apropriada pelos 60% mais pobres  |
@@ -43,8 +48,8 @@ Especificamente, para acelerar o desenvolvimento humano no estado do Amapá, aç
 |  0.95        |  Percentual da renda apropriada pelos 40% mais pobres  |
 |  0.82        |  Percentual da renda apropriada pelos 20% mais pobres  |
 
+</td><td>
 
-Table 2
 |  correlação  |  nome                                                                          |
 |--------------|--------------------------------------------------------------------------------|
 |  1.00        |  % de 11 a 13 anos nos anos finais do fundamental <br> ou com fundamental completo  |
@@ -72,6 +77,7 @@ Table 2
 |  0.82        |  % de 5 a 6 anos na escola                                                     |
 |  0.81        |  Taxa de frequência bruta ao básico                                            |
 |  0.81        |  % da população em domicílios com banheiro <br> e água encanada                     |
+</td></tr> </table>
 
 Primeiro passo para melhorar (aumentar) o percentual de 11-13 anos com ensino fundamental completo (e portanto educação no estado) seria aumentar a porcentagem de mulheres concluindo ensino fundamental.
 
