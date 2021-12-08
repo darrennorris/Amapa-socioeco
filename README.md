@@ -38,7 +38,7 @@ Especificamente, para acelerar o desenvolvimento humano no estado do Amapá, aç
 
 
 <table>
-<tr><th>Table 1 Heading 1 </th><th>Table 1 Heading 2</th></tr>
+<tr><th>Percentual de 11-13 anos com <br> ensino fundamental completo </th><th>Renda dos 60% mais pobres </th></tr>
 <tr><td>
 
 |  correlação  |  nome                                                  |
