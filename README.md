@@ -43,10 +43,10 @@ Especificamente, para acelerar o desenvolvimento humano no estado do Amapá, aç
 
 |  correlação  |  nome                                                  |
 |--------------|--------------------------------------------------------|
-|  1.00        |  Percentual da renda apropriada pelos 60% mais pobres  |
-|  0.96        |  Percentual da renda apropriada pelos 80% mais pobres  |
-|  0.95        |  Percentual da renda apropriada pelos 40% mais pobres  |
-|  0.82        |  Percentual da renda apropriada pelos 20% mais pobres  |
+|  1.00        |  Percentual da renda apropriada <br> pelos 60% mais pobres  |
+|  0.96        |  Percentual da renda apropriada <br> pelos 80% mais pobres  |
+|  0.95        |  Percentual da renda apropriada <br> pelos 40% mais pobres  |
+|  0.82        |  Percentual da renda apropriada <br> pelos 20% mais pobres  |
 
 </td><td>
 

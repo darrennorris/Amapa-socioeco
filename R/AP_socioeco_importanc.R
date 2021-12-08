@@ -177,7 +177,7 @@ df_pren60 %>%
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed")) -> table_cor_pren60
 
-cor_pren60 %>%
+table_cor_pren60 %>%
   save_kable(file = "dados//tables//table_cor_pren60.html", self_contained = T)
 
 df_t_fund11a1 %>% 
