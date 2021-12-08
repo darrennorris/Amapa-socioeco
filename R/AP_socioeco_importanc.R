@@ -166,6 +166,7 @@ df_pren60$cor_vars <- row.names(df_pren60)
 df_t_fund11a1 <- data.frame(cor_t_fund11a13) # 172
 df_t_fund11a1$cor_vars <- row.names(df_t_fund11a1)
 
+#export html -> copy html to https://www.tablesgenerator.com/markdown_tables
 df_pren60 %>% 
   filter(cor_pren60 > 0.8) %>% 
   left_join(df_siglas, by = c("cor_vars" = "sigla")) %>% 
@@ -185,7 +186,8 @@ df_t_fund11a1 %>%
   select(correlação, nome) %>% 
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
-  scroll_box(width = "500px", height = "200px") 
+  scroll_box(width = "500px", height = "200px") %>%
+  save_kable(file = "table_cor_t_fund11a13.html", self_contained = T)
 
 
 
