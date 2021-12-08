@@ -224,7 +224,10 @@ png(file = "figures//AP_fig_muledu.png", bg = "white", type = c("cairo"),
     width=4000, height=3000, res = 600)
 AP_fig_muledu + theme(text = element_text(size = 11))
 dev.off()
-  
+
+#save a copy
+save.image("~/ZEE_socioeco/ZEEAmapa/AP_socioeco_importance.RData")  
+
 #Check what is going on below!!!
 df_se %>% select(c(id_col, "ano", vars_mul_edu)) %>% 
 
