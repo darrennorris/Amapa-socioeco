@@ -48,7 +48,7 @@ Table 2
 |  correlação  |  nome                                                                          |
 |--------------|--------------------------------------------------------------------------------|
 |  1.00        |  % de 11 a 13 anos nos anos finais do fundamental <br> ou com fundamental completo  |
-|  0.99        |  % de 12 a 14 anos nos anos finais do fundamental ou com fundamental completo  |
+|  0.99        |  % de 12 a 14 anos nos anos finais do fundamental <br> ou com fundamental completo  |
 |  0.94        |  % de 15 a 17 anos com fundamental completo                                    |
 |  0.94        |  % de 18 a 24 anos com fundamental completo                                    |
 |  0.93        |  % de 18 anos ou mais com fundamental completo                                 |
@@ -71,7 +71,7 @@ Table 2
 |  0.82        |  Taxa de frequência líquida ao básico                                          |
 |  0.82        |  % de 5 a 6 anos na escola                                                     |
 |  0.81        |  Taxa de frequência bruta ao básico                                            |
-|  0.81        |  % da população em domicílios com banheiro e água encanada                     |
+|  0.81        |  % da população em domicílios com banheiro <br> e água encanada                     |
 
 Primeiro passo para melhorar (aumentar) o percentual de 11-13 anos com ensino fundamental completo (e portanto educação no estado) seria aumentar a porcentagem de mulheres concluindo ensino fundamental.
 
