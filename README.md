@@ -37,7 +37,9 @@ Especificamente, para acelerar o desenvolvimento humano no estado do Amapá, aç
 <img src="figures/AP_fig_impvars.png" alt="IDHM" width="450" height="500">
 
 Tabela
+<div>
 <iframe srcdoc ="table_cor_pren60.html" title="tabela"></iframe>
+<div>
 
 Primeiro passo para melhorar (aumentar) o percentual de 11-13 anos com ensino fundamental completo (e portanto educação no estado) seria aumentar a porcentagem de mulheres concluindo ensino fundamental.
 
