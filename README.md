@@ -61,4 +61,3 @@ Dois municípios no estado (Vitória do Jari e Pedra Branca do Amapari) represen
 (imagem de alta qualidade aqui: [CFEM/MAPA/AP](https://github.com/darrennorris/Amapa-socioeco/blob/main/figures/AP_mapa_cfem.tif) )
 <img src="figures/AP_mapa_cfem.png" alt="IDHM" width="380" height="250">
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
