@@ -32,7 +32,7 @@ Para entender melhor os valores do IDHM apresentados e também para facilitar o 
 Um diagnóstico com base em modelos lineares mostra que ações para reduzir pobreza, reduzir desigualdade e melhorar educação são os mais relevantes para melhorar o desenvolvimento humano no estado do Amapá. 
 
 Especificamente, para acelerar o desenvolvimento humano no estado do Amapá, ações devem melhorar o percentual de 11-13 anos com ensino fundamental completo e a renda dos 60% mais pobres.  
-(imagem de alta qualidade aqui: [IDHM/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_fig_impvars.tif) )
+(imagem de alta qualidade aqui: [variáveis importantes ](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_fig_impvars.tif) )
 
 <img src="figures/AP_fig_impvars.png" alt="IDHM" width="450" height="500">
 
