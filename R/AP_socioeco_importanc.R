@@ -6,6 +6,8 @@ library(tidyverse)
 library(tidymodels)
 library(readxl)
 library(MuMIn) # AICc function
+library(knitr)
+library(kableExtra)
 
 sigbase <- "dados\\ZEE_AP_basedados_sig.xlsx"
 df_se <- read_excel(sigbase, sheet = "IDHM_e_mais", 
@@ -65,6 +67,8 @@ myglance.lm <- function(x, ...) {
     )
   )
 }
+
+#Run models
 dfmodel %>%
   pivot_longer(cols = c(explanatory_col), 
                names_to = "explain_name", values_to = "explain_value") %>% 
@@ -148,6 +152,44 @@ png(file = "figures//AP_fig_impvars.png", bg = "white", type = c("cairo"),
     width=4000, height=5000, res = 600)
 AP_fig_impvars + theme(text = element_text(size = 8))
 dev.off()
+
+# 
+# t_fund11a13 11-13 anos com ensino fundamental e 
+# pren60 a renda dos 60% mais pobres.
+cor.test(df_se_vars$pren60, df_se_vars$t_fund11a13)
+plot(df_se_vars$pren60, df_se_vars$t_fund11a13)
+
+cor_pren60 <- round(cor(df_se_vars), 2)[, 'pren60']
+cor_t_fund11a13 <- round(cor(df_se_vars), 2)[, 't_fund11a13']
+df_pren60 <- data.frame(cor_pren60) 
+df_pren60$cor_vars <- row.names(df_pren60)
+df_t_fund11a1 <- data.frame(cor_t_fund11a13) # 172
+df_t_fund11a1$cor_vars <- row.names(df_t_fund11a1)
+
+df_pren60 %>% 
+  filter(cor_pren60 > 0.8) %>% 
+  left_join(df_siglas, by = c("cor_vars" = "sigla")) %>% 
+  arrange(desc(cor_pren60)) %>%
+  mutate(nome = str_wrap(nome_curto, 30), 
+         correlação = cor_pren60) %>%
+  select(correlação, nome) %>% 
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
+  save_kable(file = "table_cor_pren60.html", self_contained = T)
+
+df_t_fund11a1 %>% 
+  left_join(df_siglas, by = c("cor_vars" = "sigla")) %>% 
+  arrange(desc(cor_t_fund11a13)) %>%
+  mutate(nome = str_wrap(nome_curto, 30), 
+         correlação = cor_t_fund11a13) %>%
+  select(correlação, nome) %>% 
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
+  scroll_box(width = "500px", height = "200px") 
+
+
+
+
 
 #Educação e gravidez
 #best for each
