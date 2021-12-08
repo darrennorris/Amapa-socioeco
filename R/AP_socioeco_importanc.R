@@ -168,7 +168,7 @@ df_t_fund11a1$cor_vars <- row.names(df_t_fund11a1)
 
 #export html -> copy html to https://www.tablesgenerator.com/markdown_tables
 df_pren60 %>% 
-  filter(cor_pren60 > 0.8) %>% 
+  filter(cor_pren60 > 0.8, cor_pren60 < 1.0) %>% 
   left_join(df_siglas, by = c("cor_vars" = "sigla")) %>% 
   arrange(desc(cor_pren60)) %>%
   mutate(nome = str_wrap(nome_curto, 30), 
@@ -181,7 +181,7 @@ table_cor_pren60 %>%
   save_kable(file = "dados//tables//table_cor_pren60.html", self_contained = T)
 
 df_t_fund11a1 %>% 
-  filter(cor_t_fund11a13 > 0.8) %>% 
+  filter(cor_t_fund11a13 > 0.8, cor_t_fund11a13 < 1.0) %>% 
   left_join(df_siglas, by = c("cor_vars" = "sigla")) %>% 
   arrange(desc(cor_t_fund11a13)) %>%
   mutate(nome = str_wrap(nome_curto, 30), 
@@ -191,9 +191,6 @@ df_t_fund11a1 %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
   scroll_box(width = "500px", height = "200px") %>%
   save_kable(file = "dados//tables//table_cor_t_fund11a13.html", self_contained = T)
-
-
-
 
 
 #Educação e gravidez
