@@ -23,7 +23,7 @@ Os mapas e cartogramas ficam na pasta [figures](https://github.com/darrennorris/
 -   [Mapas](## Mapas)
       -   [How to load the data in R?](### Índices de Desenvolvimento e Vulnerabilidade)
 
-## Mapas
+ ## Mapas
 ### Índices de Desenvolvimento e Vulnerabilidade
 Índice de Desenvolvimento Humano Municipal no Estado do Amapá
 (imagem de alta qualidade aqui: [IDHM/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_mapa_IDHM.tif) )
