@@ -28,3 +28,6 @@ vignettes/*.pdf
 .Renviron
 ZEEAmapa.Rproj
 prep_dados.RData
+READMEold.md
+cefm.csv
+AP_socioeco_importance.RData
