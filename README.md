@@ -21,7 +21,7 @@ Os dados aqui apresentados (gráficos, mapas) representam conteúdo do domínio 
 Os mapas e cartogramas ficam na pasta [figures](https://github.com/darrennorris/ZEEAmapa/tree/main/figures) (formato .png e .tif), dados geoespaciais na pasta [vector](https://github.com/darrennorris/ZEEAmapa/tree/main/vector) (formato shapefile e GPKG) e dados tabulados na pasta [dados](https://github.com/darrennorris/ZEEAmapa/tree/main/dados) (copia de dados disponibilisados pela [abjData](https://github.com/abjur/abjData), definicão de siglas etc) .
 
 -   [Mapas](## Mapas)
-  -   [How to load the data in R?](### Índices de Desenvolvimento e Vulnerabilidade)
+      -   [How to load the data in R?](### Índices de Desenvolvimento e Vulnerabilidade)
 
 ## Mapas
 ### Índices de Desenvolvimento e Vulnerabilidade
