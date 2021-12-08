@@ -36,12 +36,13 @@ Especificamente, para acelerar o desenvolvimento humano no estado do Amapá, aç
 
 <img src="figures/AP_fig_impvars.png" alt="IDHM" width="450" height="500">
 
+Variáveis socioeconômicas são freqüentemente correlacionadas, portanto, ao focar em apenas duas, é provável que as mudanças também melhorem outras variáveis. A tabela abaixo mostra as 31 variáveis que estão associadas (fortemente correlacionadas) com as duas variáveis identificadas (percentual de 11-13 anos com ensino fundamental completo e a renda dos 60% mais pobres).
 
 <table>
 <tr><th>Percentual de 11-13 anos com <br> ensino fundamental completo </th><th>Renda dos 60% mais pobres </th></tr>
 <tr><td>
 
-|  correlação  |  nome                                                  |
+|  correlação  |  variável                                                  |
 |--------------|--------------------------------------------------------|
 |  1.00        |  Percentual da renda apropriada <br> pelos 60% mais pobres  |
 |  0.96        |  Percentual da renda apropriada <br> pelos 80% mais pobres  |
@@ -50,7 +51,7 @@ Especificamente, para acelerar o desenvolvimento humano no estado do Amapá, aç
 
 </td><td>
 
-|  correlação  |  nome                                                                          |
+|  correlação  |  variável                                                                          |
 |--------------|--------------------------------------------------------------------------------|
 |  1.00        |  % de 11 a 13 anos nos anos finais do fundamental <br> ou com fundamental completo  |
 |  0.99        |  % de 12 a 14 anos nos anos finais do fundamental <br> ou com fundamental completo  |
