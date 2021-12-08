@@ -20,12 +20,12 @@ Os dados aqui apresentados (gráficos, mapas) representam conteúdo do domínio 
 
 Os mapas e cartogramas ficam na pasta [figures](https://github.com/darrennorris/ZEEAmapa/tree/main/figures) (formato .png e .tif), dados geoespaciais na pasta [vector](https://github.com/darrennorris/ZEEAmapa/tree/main/vector) (formato shapefile e GPKG) e dados tabulados na pasta [dados](https://github.com/darrennorris/ZEEAmapa/tree/main/dados) (copia de dados disponibilisados pela [abjData](https://github.com/abjur/abjData), definicão de siglas etc) .
 
--   [Mapas](#Mapas)
-      -   [Índices](##Índices de Desenvolvimento e Vulnerabilidade)
--   [Mineração](#Mineração no Estado do Amapá)
+- [Mapas](#mapas)
+  * [Índices de Desenvolvimento e Vulnerabilidade](#-ndices-de-desenvolvimento-e-vulnerabilidade)
+- [Mineração no Estado do Amapá](#minera--o-no-estado-do-amap-
 
- ## Mapas
- ### Índices de Desenvolvimento e Vulnerabilidade
+## Mapas
+### Índices de Desenvolvimento e Vulnerabilidade
 Índice de Desenvolvimento Humano Municipal no Estado do Amapá
 (imagem de alta qualidade aqui: [IDHM/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_mapa_IDHM.tif) )
 
@@ -48,7 +48,7 @@ Variáveis socioeconômicas não existem em isolação, e com base nos dados glo
 
 <img src="figures/AP_fig_muledu.png" alt="maternidade" width="450" height="350">
 
- ## Mineração no Estado do Amapá
+## Mineração no Estado do Amapá
 Espera-se que as tensões entre mineração e desenvolvimento sustentavel se intensifiquem à medida que as populações humanas crescem e as tecnologias avançam. No entanto, a mineração também pode ser um meio de financiar caminhos alternativos de desenvolvimento que, a longo prazo, podem trazer verios beneficios ([DDSM](https://www.gov.br/mme/pt-br/assuntos/secretarias/geologia-mineracao-e-transformacao-mineral/desenvolvimento-sustentavel-na-mineracao-1), [IISD](https://www.iisd.org/articles/how-advance-sustainable-mining)).
 
 Mineração a escala idustrial inicio na decada de 1950 no Estado do Amapá. Depois de mais de 70 anos, um relatorio recente ([Costa 2019](http://ageamapa.ap.gov.br/docs/investinamapa/Plano-de-Mineracao.pdf)) demonstra que a exportação de bens minerais ainda é o principal gerador de receitas na balança comercial amapaense, representando aproximadamente 65% de tudo que foi exportado pelo estado em 2018 (cerca de 150 milhões de dólares (US$)).
