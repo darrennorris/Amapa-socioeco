@@ -39,7 +39,7 @@ Especificamente, para acelerar o desenvolvimento humano no estado do Amapá, aç
 Variáveis socioeconômicas são freqüentemente correlacionadas, portanto, ao focar em apenas duas, é provável que as mudanças também melhorem outras variáveis. A tabela abaixo mostra as 31 variáveis que estão associadas (fortemente correlacionadas) com as duas variáveis identificadas (percentual de 11-13 anos com ensino fundamental completo e a renda dos 60% mais pobres).
 
 <table>
-<tr><th>Percentual de 11-13 anos com <br> ensino fundamental completo </th><th>Renda dos 60% mais pobres </th></tr>
+<tr><th>Renda dos 60% mais pobres </th><th>Percentual de 11-13 anos com <br> ensino fundamental completo </th></tr>
 <tr><td>
 
 |  correlação  |  variável                                                  |
