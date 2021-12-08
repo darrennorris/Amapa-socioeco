@@ -179,6 +179,7 @@ df_pren60 %>%
   save_kable(file = "table_cor_pren60.html", self_contained = T)
 
 df_t_fund11a1 %>% 
+  filter(cor_t_fund11a13 > 0.8) %>% 
   left_join(df_siglas, by = c("cor_vars" = "sigla")) %>% 
   arrange(desc(cor_t_fund11a13)) %>%
   mutate(nome = str_wrap(nome_curto, 30), 
