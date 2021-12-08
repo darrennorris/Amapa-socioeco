@@ -18,7 +18,7 @@ Os mapas e cartogramas ficam na pasta [figures](https://github.com/darrennorris/
 
 - [Mapas](#mapas)
   * [Desenvolvimento e Vulnerabilidade](#desenvolvimento-e-vulnerabilidade)
-  * [Educação e maternidade]("educacao")
+  * [Educação e maternidade](#educacao")
 - [Mineração](#mineracao)
 
 ## Mapas
