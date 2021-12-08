@@ -82,7 +82,7 @@ Variáveis socioeconômicas são freqüentemente correlacionadas, portanto, ao f
 </td></tr> </table>
 
 <a id="educacao"></a>
-###Educação e maternidade
+### Educação e maternidade
 
 Primeiro passo para melhorar (aumentar) o percentual de 11-13 anos com ensino fundamental completo (e portanto educação no estado) seria aumentar a porcentagem de mulheres concluindo ensino fundamental.
 
