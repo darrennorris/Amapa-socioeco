@@ -227,6 +227,14 @@ subt_label_mat15a17 <- paste("Mulheres de 15 a 17 anos.\nTons de magenta represe
                     sep = "")
 subt_label_mat15a17
 
+#municipios abixo do mediano
+df_Ap_mul_edu %>% filter(ano == 2010, Idade_escola == "18 anos ou mais", 
+                         `Percentual de mulheres que tiveram filhos` > mat_med_2010_15a17) %>% 
+  group_by(municipio, ano, Idade, `Percentual de mulheres que tiveram filhos`) %>% 
+  summarise(acount = n()) %>%
+  arrange(desc(`Percentual de mulheres que tiveram filhos`))
+#arrange(municipio)
+sf_ap_muni$NM_MUN
 sf_mat_edu %>% 
   filter(Idade == "15 a 17 anos") %>% 
   ggplot() + 

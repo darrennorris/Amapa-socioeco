@@ -82,13 +82,26 @@ Variáveis socioeconômicas são freqüentemente correlacionadas, portanto, ao f
 <a id="educacao"></a>
 ### Educação e maternidade
 
-Primeiro passo para melhorar (aumentar) o percentual de 11-13 anos com ensino fundamental completo (e portanto educação no estado) seria aumentar a porcentagem de mulheres concluindo ensino fundamental.
+Um primeiro passo importante para melhorar (aumentar) o percentual de 11-13 anos com ensino fundamental completo (e portanto melhorar educação no estado) seria aumentar a porcentagem de mulheres concluindo ensino fundamental.
 
 Variáveis socioeconômicas não existem em isolação, e com base nos dados globais mostrando a importância de educação ([Hans Rosling Religion and babies](https://www.ted.com/talks/hans_rosling_religions_and_babies/transcript?language=en)), podemos olhar as mudanças entre 1991 e 2010 de educação e maternidade em mulheres mais jovens ([WHO](https://www.who.int/news-room/fact-sheets/detail/adolescent-pregnancy), [febrasgo Gravidez na adolescencia](https://www.febrasgo.org.br/pt/noticias/item/1210-reflexoes-sobre-a-semana-nacional-de-prevencao-da-gravidez-na-adolescencia-2021)). Conforme a educação avançava, houve uma redução na % de maternidade em mulheres mais jovens (redução no % mediano e na variação nos valores entre municípios), e portanto, com avanços na educação, esperamos uma redução expressiva na desigualdade entre os sexos .......
 
 (imagem de alta qualidade aqui: [maternidade/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_fig_muledu.tif) )
 
 <img src="figures/AP_fig_muledu.png" alt="maternidade" width="450" height="350">
+
+Olhando a dsitribuição entre municipios tambem mostra uma redução no % mediano e na variação nos valores entre municípios.
+
+(imagem de alta qualidade aqui: [mapa/maternidade/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_mapa_maternidade_15a17.tif) )
+
+<img src="figures/AP_mapa_maternidade_15a17.png" alt="maternidade_mapa" width="450" height="350">
+
+Uma comparação com o valor mediano de 2010 mostra que havia 10 municípios com um percentual de mulheres entre 15 e 17 anos acima do mediano (Calçoene, Ferreira Gomes, Laranjal do Jari, Mazagão, Pedra Branca do Amapari, 
+Pracuúba, Serra do Navio, Tartarugalzinho). Com percentuais mais elevados em TARTARUGALZINHO (23,0%), PEDRA BRANCA DO AMAPARI (21.2%) e Calçoene (20,7%).
+
+(imagem de alta qualidade aqui: [mapa/maternidade/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_mapa_maternidade_mediano_15a17.tif) )
+
+<img src="figures/AP_mapa_maternidade_mediano_15a17.png" alt="maternidade_mapa" width="450" height="350">
 
 <a id="mineracao"></a>
 ## Mineração
