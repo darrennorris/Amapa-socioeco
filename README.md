@@ -101,7 +101,7 @@ Pracuúba, Serra do Navio, Tartarugalzinho). Com percentuais mais elevados em TA
 
 (imagem de alta qualidade aqui: [mapa/maternidade/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_mapa_maternidade_mediano_15a17.tif) )
 
-<img src="figures/AP_mapa_maternidade_mediano_15a17.png" alt="maternidade_mapa" width="450" height="350">
+<img src="figures/AP_mapa_maternidade_mediano_15a17.png" alt="maternidade_mapa" width="500" height="350">
 
 <a id="mineracao"></a>
 ## Mineração
