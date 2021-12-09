@@ -94,14 +94,14 @@ Olhando a dsitribuição entre municipios tambem mostra uma redução no % media
 
 (imagem de alta qualidade aqui: [mapa/maternidade/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_mapa_maternidade_15a17.tif) )
 
-<img src="figures/AP_mapa_maternidade_15a17.png" alt="maternidade_mapa" width="500" height="350">
+<img src="figures/AP_mapa_maternidade_15a17.png" alt="maternidade_mapa" width="500" height="300">
 
 Uma comparação com o valor mediano de 2010 mostra que havia 8 municípios com um percentual de mulheres entre 15 e 17 anos acima do mediano (Calçoene, Ferreira Gomes, Laranjal do Jari, Mazagão, Pedra Branca do Amapari, 
 Pracuúba, Serra do Navio, Tartarugalzinho). Com percentuais mais elevados em TARTARUGALZINHO (23,0%), Pedra Branca do Amapari (21.2%) e Calçoene (20,7%).
 
 (imagem de alta qualidade aqui: [mapa/maternidade/AP](https://github.com/darrennorris/ZEEAmapa/blob/main/figures/AP_mapa_maternidade_mediano_15a17.tif) )
 
-<img src="figures/AP_mapa_maternidade_mediano_15a17.png" alt="maternidade_mapa" width="500" height="350">
+<img src="figures/AP_mapa_maternidade_mediano_15a17.png" alt="maternidade_mapa" width="500" height="300">
 
 <a id="mineracao"></a>
 ## Mineração
