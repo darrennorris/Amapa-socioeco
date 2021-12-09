@@ -222,7 +222,7 @@ dev.off()
 # melhores municipios ??
 df_mulsum %>% filter(ano == 2010, Idade_escola == "18 anos ou mais") %>% 
   pull(`Percentual de mulheres que tiveram filhos`) -> mat_med_2010_15a17
-subt_label_mat15a17 <- paste("Mulheres de 15 a 17 anos.Tons de magenta representam valores acima do mediano em 2010 (", 
+subt_label_mat15a17 <- paste("Mulheres de 15 a 17 anos.\nTons de magenta representam valores acima do mediano em 2010 (", 
                     round(mat_med_2010_15a17,1), "%) ", "\ne tons de verde valores abaixo.", 
                     sep = "")
 subt_label_mat15a17
