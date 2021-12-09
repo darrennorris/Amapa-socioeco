@@ -8,6 +8,7 @@ library(readxl)
 library(MuMIn) # AICc function
 library(knitr)
 library(kableExtra)
+library(viridis)
 
 sigbase <- "dados\\ZEE_AP_basedados_sig.xlsx"
 df_se <- read_excel(sigbase, sheet = "IDHM_e_mais", 

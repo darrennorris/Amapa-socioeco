@@ -5,6 +5,7 @@ library(readxl)
 library(scales)
 library(sf)
 library(viridis)
+library(RColorBrewer)
 library(gridExtra)
 
 #IDHM
@@ -235,15 +236,18 @@ df_Ap_mul_edu %>% filter(ano == 2010, Idade_escola == "18 anos ou mais",
   arrange(desc(`Percentual de mulheres que tiveram filhos`))
 #arrange(municipio)
 sf_ap_muni$NM_MUN
+?viridis_pal
+myviri <- viridis_pal()(9)
+show_col(myviri[1:8])
 sf_mat_edu %>% 
   filter(Idade == "15 a 17 anos") %>% 
   ggplot() + 
   geom_sf(aes(fill = `Percentual de mulheres que tiveram filhos`)) + 
   scale_x_continuous(breaks = seq(-55, -49.8, by = 2)) + 
   scale_fill_gradient2("Percentual de mulheres\nque tiveram filhos", 
-                       low = "green", mid = "white",
-                       high = muted("magenta"),
-                       midpoint = mat_med_2010_15a17) +
+                      low = "green", mid = "white",
+                      high = muted("magenta"),
+                     midpoint = mat_med_2010_15a17) +
   facet_wrap(~ano) + 
   theme_bw() + 
   labs(title = "Maternidade no Estado do Amapá", 
@@ -259,6 +263,7 @@ sf_mat_edu %>%
   theme(legend.key.width = unit(0.5,"cm"), 
         legend.margin=margin(0,0,0,0),
         legend.box.margin=margin(0,0,0,0)) -> AP_mapa_maternidade_mediano_15a17
+AP_mapa_maternidade_mediano_15a17
 
 #Export
 tiff("figures//AP_mapa_maternidade_mediano_15a17.tif", 
