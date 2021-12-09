@@ -219,7 +219,49 @@ png(file = "figures//AP_mapa_maternidade_15a17.png", bg = "white", type = c("cai
 mapa_maternidade_15a17 + theme(text = element_text(size = 8))
 dev.off()
 
+# melhores municipios ??
+df_mulsum %>% filter(ano == 2010, Idade_escola == "18 anos ou mais") %>% 
+  pull(`Percentual de mulheres que tiveram filhos`) -> mat_med_2010_15a17
+subt_label_mat15a17 <- paste("Mulheres de 15 a 17 anos.Tons de magenta representam valores acima do mediano em 2010 (", 
+                    round(mat_med_2010_15a17,1), "%) ", "\ne tons de verde valores abaixo.", 
+                    sep = "")
+subt_label_mat15a17
 
+sf_mat_edu %>% 
+  filter(Idade == "15 a 17 anos") %>% 
+  ggplot() + 
+  geom_sf(aes(fill = `Percentual de mulheres que tiveram filhos`)) + 
+  scale_x_continuous(breaks = seq(-55, -49.8, by = 2)) + 
+  scale_fill_gradient2("Percentual de mulheres\nque tiveram filhos", 
+                       low = "green", mid = "white",
+                       high = muted("magenta"),
+                       midpoint = mat_med_2010_15a17) +
+  facet_wrap(~ano) + 
+  theme_bw() + 
+  labs(title = "Maternidade no Estado do Amapá", 
+       subtitle = subt_label_mat15a17,
+       x="", y="",
+       caption = "Fonte: Atlas do Desenvolvimento Humano: http://www.atlasbrasil.org.br/ (acessado 3 de Dezembro 2021),
+       Instituto Brasileiro de Geografia e Estatística (Municípios da Amazônia Legal 2020, acessado 7 de Outubro 2021), 
+       PROJEÇÃO: POLICÔNICA. Meridiano Central: -54° W.Gr.Sistema de Referência: SIRGAS2000") + 
+  theme(plot.title.position = "plot", 
+        plot.caption.position = "plot", 
+        plot.caption = element_text(hjust = 0), 
+        text = element_text(size = 8))   + 
+  theme(legend.key.width = unit(0.5,"cm"), 
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0)) -> AP_mapa_maternidade_mediano_15a17
+
+#Export
+tiff("figures//AP_mapa_maternidade_mediano_15a17.tif", 
+     width = 15, height = 8, units = "cm", res = 600, compression = "lzw")
+AP_mapa_maternidade_mediano_15a17
+dev.off()
+
+png(file = "figures//AP_mapa_maternidade_mediano_15a17.png", bg = "white", type = c("cairo"), 
+    width=3000, height=2000, res = 600)
+AP_mapa_maternidade_mediano_15a17 + theme(text = element_text(size = 8))
+dev.off()
 
 #Mineracao
 #CFEM Compensação Financeira pela Exploração de Recursos Minerais 
