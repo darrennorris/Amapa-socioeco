@@ -171,6 +171,56 @@ dev.off()
 
 save.image("~/ZEE_socioeco/ZEEAmapa/prep_dados.RData")
 
+#Educaçao e maternidade
+#Objects from AP_socioeco_importan.R
+load("~/ZEE_socioeco/ZEEAmapa/AP_socioeco_importance.RData")
+sf_ap_muni %>% right_join(df_Ap_mul_edu %>% 
+                            mutate(codmun7 = as.character(codmun7)), 
+                          by = c("CD_MUN"="codmun7")) -> sf_mat_edu
+
+sf_mat_edu %>% 
+  filter(Idade == "10 a 14 anos") %>% 
+  ggplot() + 
+  geom_sf(aes(fill = `Percentual de mulheres que tiveram filhos`)) + 
+  scale_x_continuous(breaks = seq(-55, -49.8, by = 2)) +
+  facet_wrap(~ano) + 
+  theme_bw()
+
+sf_mat_edu %>% 
+  filter(Idade == "15 a 17 anos") %>% 
+  ggplot() + 
+  geom_sf(aes(fill = `Percentual de mulheres que tiveram filhos`)) + 
+  scale_x_continuous(breaks = seq(-55, -49.8, by = 2)) + 
+  scale_fill_viridis_c("Percentual de mulheres\nque tiveram filhos") +
+  facet_wrap(~ano) + 
+  theme_bw() + 
+  labs(title = "Maternidade  no Estado do Amapá", 
+       subtitle = "Mulheres de 15 a 17 anos",
+       x="", y="",
+       caption = "Fonte: Atlas do Desenvolvimento Humano: http://www.atlasbrasil.org.br/ (acessado 3 de Dezembro 2021),
+       Instituto Brasileiro de Geografia e Estatística (Municípios da Amazônia Legal 2020, acessado 7 de Outubro 2021), 
+       PROJEÇÃO: POLICÔNICA. Meridiano Central: -54° W.Gr.Sistema de Referência: SIRGAS2000") + 
+  theme(plot.title.position = "plot", 
+        plot.caption.position = "plot", 
+        plot.caption = element_text(hjust = 0), 
+        text = element_text(size = 8))   + 
+  theme(legend.key.width = unit(0.5,"cm"), 
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0)) -> mapa_maternidade_15a17
+#
+#Export
+tiff("figures//AP_mapa_maternidade_15a17.tif", 
+     width = 15, height = 8, units = "cm", res = 600, compression = "lzw")
+mapa_maternidade_15a17
+dev.off()
+
+png(file = "figures//AP_mapa_maternidade_15a17.png", bg = "white", type = c("cairo"), 
+    width=3000, height=2000, res = 600)
+mapa_maternidade_15a17 + theme(text = element_text(size = 8))
+dev.off()
+
+
+
 #Mineracao
 #CFEM Compensação Financeira pela Exploração de Recursos Minerais 
 #https://sistemas.anm.gov.br/arrecadacao/extra/Relatorios/arrecadacao_cfem_substancia.aspx

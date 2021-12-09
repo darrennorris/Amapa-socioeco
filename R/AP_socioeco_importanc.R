@@ -41,7 +41,7 @@ df_se %>%
   select(c(id_col, "ano", social_indexes_use, explanatory_col)) %>% 
   pivot_longer(cols = c(social_indexes_use), names_to = "response_name", 
                values_to = "response_val") -> dfmodel
-#adapt from https://www.tidymodels.org/learn/develop/broom/ to add AICc
+#Adapt from https://www.tidymodels.org/learn/develop/broom/ to add AICc
 myglance.lm <- function(x, ...) {
   with(
     summary(x),
@@ -204,6 +204,8 @@ vars_mul_edu <- c("t_m10a14cf", "t_m15a17cf", "t_fund18m", "t_fund11a13")
 resp_vars_mul_edu <- c("t_fund18m", "t_fund11a13")
 exp_vars_mul_edu <- c("t_m10a14cf", "t_m15a17cf")
 
+# put back IBGE codes
+df_se %>% select(municipio, codmun6, codmun7) %>% left_join(
 df_se %>% select(c(id_col, "ano", "t_fund11a13", "t_m10a14cf")) %>% 
   mutate(Idade = "10 a 14 anos", 
          Idade_escola = "11 a 13 anos",
@@ -214,7 +216,8 @@ df_se %>% select(c(id_col, "ano", "t_fund18m", "t_m15a17cf")) %>%
   mutate(Idade = "15 a 17 anos", 
          Idade_escola = "18 anos ou mais",
          "Percentual de mulheres que tiveram filhos" = t_m15a17cf,
-         "Percentual com fundamental completo" = t_fund18m)) -> df_Ap_mul_edu
+         "Percentual com fundamental completo" = t_fund18m)) 
+) -> df_Ap_mul_edu
 
 #Plot
 # to do - make point shapes to show regions?
@@ -225,6 +228,7 @@ df_Ap_mul_edu %>% group_by(ano, Idade_escola) %>%
               median(`Percentual com fundamental completo`), na.rm = TRUE) -> df_mulsum
 
 df_Ap_mul_edu %>% 
+  ungroup() %>%
   ggplot(aes(y = `Percentual de mulheres que tiveram filhos`, 
              x = `Percentual com fundamental completo`)) + 
   geom_point(colour = "black", size = 1.0) +
@@ -235,7 +239,8 @@ df_Ap_mul_edu %>%
              aes(xintercept = `Percentual com fundamental completo`)) +
   geom_hline(data = df_mulsum, linetype = "dashed", size = 0.3,
              aes(yintercept = `Percentual de mulheres que tiveram filhos`)) +
-  stat_smooth(method = "gam", aes(colour = Idade), size = 0.4) + 
+  #stat_smooth(method = "gam", aes(colour = Idade), formula = y ~ s(x, k = 3), size = 0.4) + 
+  stat_smooth(method = "lm", aes(colour = Idade), size = 0.4) +
   scale_color_viridis_d("Idade maternidade") +
   facet_wrap(Idade_escola~ano) + 
   labs(title = "Maternidade e Educação no Estado do Amapá", 
@@ -271,6 +276,10 @@ dev.off()
 
 #save a copy
 save.image("~/ZEE_socioeco/ZEEAmapa/AP_socioeco_importance.RData")  
+
+
+
+
 
 #Check what is going on below!!!
 df_se %>% select(c(id_col, "ano", vars_mul_edu)) %>% 
