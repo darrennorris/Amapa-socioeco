@@ -235,19 +235,48 @@ df_Ap_mul_edu %>% filter(ano == 2010, Idade_escola == "18 anos ou mais",
   summarise(acount = n()) %>%
   arrange(desc(`Percentual de mulheres que tiveram filhos`))
 #arrange(municipio)
-sf_ap_muni$NM_MUN
-?viridis_pal
-myviri <- viridis_pal()(9)
-show_col(myviri[1:8])
+# First with magenta-white-green
 sf_mat_edu %>% 
   filter(Idade == "15 a 17 anos") %>% 
   ggplot() + 
   geom_sf(aes(fill = `Percentual de mulheres que tiveram filhos`)) + 
   scale_x_continuous(breaks = seq(-55, -49.8, by = 2)) + 
   scale_fill_gradient2("Percentual de mulheres\nque tiveram filhos", 
-                      low = "green", mid = "white",
-                      high = muted("magenta"),
-                     midpoint = mat_med_2010_15a17) +
+                       low = "green", mid = "white",
+                       high = muted("magenta"),
+                       midpoint = mat_med_2010_15a17) +
+  facet_wrap(~ano) + 
+  theme_bw() + 
+  labs(title = "Maternidade no Estado do Amapá", 
+       subtitle = subt_label_mat15a17,
+       x="", y="",
+       caption = "Fonte: Atlas do Desenvolvimento Humano: http://www.atlasbrasil.org.br/ (acessado 3 de Dezembro 2021),
+       Instituto Brasileiro de Geografia e Estatística (Municípios da Amazônia Legal 2020, acessado 7 de Outubro 2021), 
+       PROJEÇÃO: POLICÔNICA. Meridiano Central: -54° W.Gr.Sistema de Referência: SIRGAS2000") + 
+  theme(plot.title.position = "plot", 
+        plot.caption.position = "plot", 
+        plot.caption = element_text(hjust = 0), 
+        text = element_text(size = 8))   + 
+  theme(legend.key.width = unit(0.5,"cm"), 
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0)) -> AP_mapa_maternidade_mediano_15a17
+AP_mapa_maternidade_mediano_15a17
+
+sf_ap_muni$NM_MUN
+?viridis_pal
+myviri <- viridis_pal()(9)
+show_col(myviri[1:8])
+sf_mat_edu %>% pull(`Percentual de mulheres que tiveram filhos`) %>% summary()
+
+#https://ggplot2-book.org/scale-colour.html
+sf_mat_edu %>% 
+  filter(Idade == "15 a 17 anos") %>% 
+  ggplot() + 
+  geom_sf(aes(fill = `Percentual de mulheres que tiveram filhos`)) + 
+  scale_x_continuous(breaks = seq(-55, -49.8, by = 2)) + 
+  scale_fill_gradientn("Percentual de mulheres\nque tiveram filhos", 
+                       colours = c("yellow", "blue", RColorBrewer::brewer.pal(5, "BuGn")),
+                       values = scales::rescale(c(0, 13.49, 13.5, 14.5, 14.501, 39))) +
   facet_wrap(~ano) + 
   theme_bw() + 
   labs(title = "Maternidade no Estado do Amapá", 
