@@ -20,6 +20,10 @@ read_excel("dados//ZEE_AP_basedados_sig.xlsx",
 #Poligonos municipios Amapa
 sf::st_read("vector//IBGE_Amazonia_Legal.GPKG", layer = "Mun_Amazonia_Legal_2020") %>% 
   filter(NM_UF == "Amapá") -> sf_ap_muni
+#equal area
+#crs_equal <- "+proj=aea +lat_1=-5 +lat_2=-42 +lat_0=-32 +lon_0=-60 +x_0=0 +y_0=0 +ellps=aust_SA +units=m +no_defs"
+#sf_ap_muni %>% st_transform(crs = crs_equal) %>% 
+#  st_write("AP_municipios.shp")
 #Poligon e contorno do estado do Amapá
 sf_ap <- st_union(sf_ap_muni)
 sf_ap <- st_sf(data.frame(CD_UF="16", geom=sf_ap))
